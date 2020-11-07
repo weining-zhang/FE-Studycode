@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+.left {
+  width: 200px;
+  height: 600px;
+  background-color: blue;
+}
+.right {
+  width: 200px;
+  height: 600px;
+  background-color: red;
+}
+.center {
+  flex: 1;
+  background-color: yellow;
+}

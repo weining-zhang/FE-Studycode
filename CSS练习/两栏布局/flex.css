@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  min-height: 600px;
+}
+
+.left {
+  width: 300px;
+  background-color: red;
+}
+
+.right {
+  flex: 1;
+  background-color: blue;
+}
