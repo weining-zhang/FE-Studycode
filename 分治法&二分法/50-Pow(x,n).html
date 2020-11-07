@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/powx-n/
+      思路：https://leetcode-cn.com/problems/powx-n/solution/fen-zhi-di-gui-jian-ji-ming-liao-by-wo-huan-neng-c/
+      https://leetcode-cn.com/problems/powx-n/solution/dai-shu-xue-gong-shi-qing-xi-hao-dong-di-gui-he-di/
+     */
+    let x = 2, n = 10;
+
+    function myPow(x, n) {
+      if (n < 0)  return 1 / myPow(x, -n);
+      if (n === 0)  return 1;
+      return  n % 2 === 1 ? 
+        x * myPow(x, n-1) :
+        myPow(x*x, n/2)
+    }
+    console.log(myPow(x, n));
+  </script>
+</body>
+</html>

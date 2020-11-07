@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/counting-bits/
+      思路：https://juejin.im/post/6844904175562653710#heading-70
+      
+      1. 奇数1的个数等于前一个偶数＋1
+      2. 偶数1的个数等于当前偶数 >> 1 的值
+     */
+    let num = 5;
+
+    function countBits(num) {
+      let res = [0];
+
+      for (let i = 1; i <= num; i++) {
+        if (i & 1)
+          res[i] = res[i-1] + 1;
+        else
+          res[i] = res[i >> 1];
+      }
+
+      return res;
+    }
+    console.log(countBits(num));
+  </script>
+</body>
+</html>

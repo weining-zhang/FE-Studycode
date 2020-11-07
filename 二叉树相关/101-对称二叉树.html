@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/symmetric-tree/
+      思路：https://leetcode-cn.com/problems/symmetric-tree/solution/di-gui-zhan-mo-ni-di-gui-bfs-by-hyj8/
+     */
+    function isSymmetric(root) {
+      if (root)
+        return check(root.left, root.right);
+      else 
+        return true;
+
+      function check(left, right) {
+        if (left === null && right === null) return true;
+        if (left && right) {
+          return left.val === right.val &&
+            check(left.left, right.right) &&
+            check(left.right, right.left);
+        }
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

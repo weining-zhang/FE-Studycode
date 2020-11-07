@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/permutations/
+      思路：https://github.com/sl1673495/leetcode-javascript/issues/68
+    */
+    let nums = [1,2,3];
+
+    function permute(nums) {
+      let n = nums.length;
+      if (n === 1) return [nums];
+
+      let res = [];
+      for (let i = 0; i < n; i++) {
+        let use = nums[i];
+        let rest = nums.slice(0, i).concat(nums.slice(i+1, n));
+        let restPermutes = permute(rest);
+        for (restPermute of restPermutes) {
+          res.push(restPermute.concat(use));
+        }
+      }
+      return res;
+    }
+    console.log(permute(nums));
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://www.jianshu.com/p/33233e48fa64
+     */
+    
+    // 示例区：
+    const PENDING = 'pending'
+    const RESOLVE = 'resolve'
+    const REJECT = 'reject'
+
+    class myPromise {
+      constructor(executor) {
+        this.state = PENDING
+        this.value = undefined
+        this.reason = undefined
+        this.onResolvedCallbacks = []
+        this.onRejectedCallbacks = []
+
+        let resolve = (value) => {
+          this.state = RESOLVE
+          this.value = value
+          this.onResolvedCallbacks.forEach(item => item())
+        }
+
+        let reject = (reason) => {
+          this.state = REJECT
+          this.reason = reason
+          this.onRejectedCallbacks.forEach(item => item())
+        }
+
+        try {
+          executor(resolve, reject)
+        } catch(e) {
+          reject(e)
+        }
+      }
+
+      then(onFulfilled, onRejected) {
+        if (this.state === RESOLVE) {
+          onFulfilled(this.value)
+        }
+        if (this.state === REJECT) {
+          onRejected(this.reason)
+        }
+
+        if (this.state === PENDING) {
+          this.onResolvedCallbacks.push(() => {
+            onFulfilled(this.value)
+          })
+          this.onRejectedCallbacks.push(() => {
+            onRejected(this.reason)
+          })
+        }
+      }
+    }
+
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+    
+
+    // 测试：
+    let p1 = new myPromise2((resolve, reject) => {
+      setTimeout(() => {
+        resolve(1)
+      }, 1000);
+    }).then(res => {
+      console.log('success: '+ res);
+    })
+
+    let p2 = new myPromise2((resolve, reject) => {
+      setTimeout(() => {
+        reject(2)
+      }, 2000);
+    }).then(res => {
+      console.log(res);
+    }, err => {
+      console.log('error: '+ err);
+    })
+
+  </script>
+</body>
+</html>

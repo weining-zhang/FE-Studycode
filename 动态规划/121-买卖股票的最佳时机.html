@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/121-mai-mai-gu-piao-de-zui-jia-shi-ji-by-alexer-66/
+     * 思路：峰谷法
+     * valley记录最低价格，max记录最高利润
+     */ 
+    let prices = [7,1,5,3,6,4];
+
+    function maxProfit(prices) {
+      let valley = Infinity;
+      let max = 0;
+
+      for (let i = 0; i < prices.length; i++) {
+        if (prices[i] < valley)
+          valley = prices[i]
+        else 
+          max = Math.max(max, prices[i] - valley)
+      }
+      return max;
+    }
+    console.log(maxProfit(prices));
+  </script>
+</body>
+</html>

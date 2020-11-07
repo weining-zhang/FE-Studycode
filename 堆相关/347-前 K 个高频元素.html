@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/top-k-frequent-elements/
+      思路：https://leetcode-cn.com/problems/top-k-frequent-elements/solution/javascript-qian-k-ge-gao-pin-yuan-su-by-user7746o/
+    */
+    let nums = [1,1,1,2,2,3], k = 2;
+
+    function topKFrequent(nums, k) {
+      let map = new Map();
+      let arr = [...new Set(nums)];
+
+      nums.map(num => {
+        if (map.has(num))
+          map.set(num, map.get(num) + 1);
+        else
+          map.set(num, 1);
+      })
+
+      return arr.sort((a, b) => map.get(b) - map.get(a)).slice(0, k);
+    }
+    console.log(topKFrequent(nums, k));
+  </script>
+</body>
+</html>

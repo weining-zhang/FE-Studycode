@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let nums = [2, 7, 11, 15];
+    let target = 9;
+    function twoSum(nums, target) {
+      /**
+       * 1.利用数组减少查询时间
+       * 在暴力法中，内层循环查找差值很浪费时间，那么如何减少查询时间呢？利用数组就可以减少查询时间。
+       * 使用一层循环，每遍历到一个元素就计算该元素与 target 之间的差值 dif，然后以 dif 为下标
+       * 到数组 temp 中寻找，如果temp[dif]有值(即不是undefined)，则返回两个元素在数组 nums 的下标，
+       * 如果没有找到，则将当前元素存入数组 temp 中(下标: nums[i], Value: i)。
+       * 在temp数组中，nums数组的下标变成值，值变成下标。
+       */
+      let temp = [];
+      for (let i = 0; i < nums.length; i++) {
+        let dif = target - nums[i];
+        if (temp[dif]) 
+          return [temp[dif], i]
+        
+        temp[nums[i]] = i;
+      }
+
+      /**
+       * 2.暴力法
+       * 使用两层循环，外层循环计算当前元素与 target 之间的差值，内层循环寻找该差值，
+       * 若找到该差值，则返回两个元素的下标。
+       */ 
+      // for (let i = 0; i < nums.length; i++) {
+      //   let dif = target - nums[i];
+      //   for (let j = i + 1; j < nums.length; j++) {
+      //     if (nums[j] === dif)
+      //       return [i, j]
+      //   }
+      // }
+    }
+    console.log(twoSum(nums, target));
+  </script>
+</body>
+</html>

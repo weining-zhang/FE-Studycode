@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/partition-equal-subset-sum/solution/416fen-ge-deng-he-zi-ji-dong-tai-gui-hua-di-gui-by/
+    */
+    var canPartition = function (nums) {
+      let target = nums.reduce((a, b) => a + b) / 2;
+      if (target % 1 !== 0) return false;
+
+      let dp = new Array(target + 1).fill(false);
+      dp[0] = true;
+      for (let n of nums) {
+        for (let i = target; i >= n; i--) {
+          if (dp[target]) return true;
+          dp[i] = dp[i] || dp[i - n];
+        }
+      }
+
+      return dp[target];
+    };
+  </script>
+</body>
+
+</html>

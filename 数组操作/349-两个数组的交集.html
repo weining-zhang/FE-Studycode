@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/intersection-of-two-arrays/
+      思路：https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/349-liang-ge-shu-zu-de-jiao-ji-by-alexer-660/
+    */
+    let nums1 = [1,2,2,1], nums2 = [2,2];
+
+    function intersection(nums1, nums2) {
+      return [...new Set(nums1.filter(item => {
+        return nums2.includes(item);
+      }))]
+    }
+    console.log(intersection(nums1, nums2));
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+          https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+      思路：https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/javascriptjie-zhong-xu-bian-li-er-cha-shu-by-user7/
+    */
+    function inorderTraversal(root) {
+      let res = [];
+
+      function help(root) {
+        if (root) {
+          help(root.left);
+          res.push(root.val);
+          help(root.right);
+        }
+      }
+      help(root);
+      return res;
+    }
+  </script>
+</body>
+</html>

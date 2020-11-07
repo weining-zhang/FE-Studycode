@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/reverse-integer/
+      思路：https://leetcode-cn.com/problems/reverse-integer/solution/wei-yun-suan-ji-jian-jie-fa-by-ijzqardmbd/
+    */
+    let x = -123;
+
+    function reverse(x) {
+      let res = 0;
+      while (x !== 0) {
+        res = res * 10 + x % 10;
+        x = (x / 10) | 0;
+      }
+      return (res | 0) === res ? res : 0;
+    }
+    console.log(reverse(x));
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/house-robber/solution/hua-jie-suan-fa-198-da-jia-jie-she-by-guanpengchn/
+    */
+    var rob = function(nums) {
+      let len = nums.length;
+      if (!len) return 0;
+
+      let dp = new Array(len + 1);
+      dp[0] = 0;
+      dp[1] = nums[0];
+      for (let i = 2; i <= len; i++) {
+        dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i-1])
+      }
+
+      return dp[len];
+    };
+  </script>
+</body>
+</html>

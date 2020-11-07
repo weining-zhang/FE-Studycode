@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+      https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+     * https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/zi-jie-leetcode3wu-zhong-fu-zi-fu-de-zui-chang-zi-/
+     * 解题思路： 使用一个数组来维护滑动窗口
+     * 
+     * 遍历字符串，判断字符是否在滑动窗口数组里
+     * 
+     *  ● 不在则 push 进数组
+     *  ● 在则删除滑动窗口数组里相同字符及相同字符前的字符，然后将当前字符 push 进数组
+     *  ● 然后将 max 更新为当前最长子串的长度
+     *
+     * 遍历完，返回 max 即可
+     */ 
+    let string = 'abcabcbb'
+    function lengthOfLongestSubstring(s) {
+      let arr = []
+      let max = 0
+      for (let i = 0; i < s.length; i++) {
+        let index = arr.indexOf(s[i])
+        if (index !== -1) {
+          arr.splice(0, index + 1)
+        }
+        arr.push(s[i])
+        max = Math.max(max, arr.length)
+      }
+      return max
+    }
+    console.log(lengthOfLongestSubstring(string));
+  </script>
+</body>
+</html>

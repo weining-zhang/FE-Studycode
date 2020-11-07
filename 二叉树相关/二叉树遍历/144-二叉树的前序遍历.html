@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      同中序遍历
+      https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
+      思路：https://www.sugarat.top/interview/code/treeTraverse.html#前序遍历
+    */
+    function preorderTraversal(root) {
+      let res = [];
+      function help(node) {
+        if (node) {
+          res.push(node.val);
+          help(node.left);
+          help(node.right);
+        }
+      }
+      help(root);
+      return res;
+    }
+  </script>
+</body>
+</html>

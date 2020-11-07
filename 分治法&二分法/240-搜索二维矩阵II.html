@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
+      思路：https://github.com/i-want-offer/FE-Interview-questions/blob/master/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%88%86%E6%B3%95.md
+     */
+    let matrix = [
+      [1, 4, 7, 11, 15],
+      [2, 5, 8, 12, 19],
+      [3, 6, 9, 16, 22],
+      [10, 13, 14, 17, 24],
+      [18, 21, 23, 26, 30]
+    ];
+    let target = 5;
+
+    function searchMatrix(matrix, target) {
+      let rows = matrix.length;
+      if (!rows)  return false;
+      let cols = matrix[0].length;
+      if (!cols)  return false;
+
+      let row = rows - 1;
+      let col = 0;
+      while (row >= 0 && col < cols) {
+        if (matrix[row][col] > target)
+          row--;
+        else if (matrix[row][col] < target)
+          col++;
+        else 
+          return true;
+      }
+
+      return false;
+    }
+    console.log(searchMatrix(matrix, target));
+  </script>
+</body>
+</html>

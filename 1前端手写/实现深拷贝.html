@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      http://conardli.top/blog/article/JS进阶/如何写出一个惊艳面试官的深拷贝.html
+      缺点：未解决循环引用问题
+     */
+    function cloneDeep(src) {
+      if (typeof src !== 'object' || src === null) return src
+      let target = Array.isArray(src) ? [] : {}
+      for (let key in src) {
+        if (typeof src[key] === 'object') {
+          target[key] = cloneDeep(src[key])
+        } else {
+          target[key] = src[key]
+        }
+      }
+      return target
+    }
+//--------------------------------------------------------------------------------------------    
+    // 练习区：
+
+
+    
+    // 测试区：
+    var a = {
+      name: "welnee",
+      book: {
+        title: "You Don't Know JS",
+        price: "45"
+      },
+      a1: undefined,
+      a2: null,
+      a3: 123
+    }
+    var b = cloneDeep(a);
+
+    a.name = "高级前端进阶";
+    a.book.price = "55";
+
+    console.log(b);
+  </script>
+</body>
+</html>

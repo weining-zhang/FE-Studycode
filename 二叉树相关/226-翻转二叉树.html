@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/invert-binary-tree/
+      思路：https://leetcode-cn.com/problems/invert-binary-tree/solution/shou-hua-tu-jie-san-chong-xie-fa-di-gui-liang-chon/
+     */
+    function invertTree(root) {
+      if (!root) return root;
+
+      invertTree(root.left);
+      invertTree(root.right);
+
+      let temp = root.left;
+      root.left = root.right;
+      root.right = temp;
+
+      return root;
+    }
+  </script>
+</body>
+</html>

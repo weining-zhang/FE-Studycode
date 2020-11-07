@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/spiral-matrix/solution/luo-xuan-ju-zhen-ji-yi-li-jie-92100-by-caifeng123/
+     */
+    let matrix = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9]
+    ];
+
+    function spiralOrder(matrix) {
+      let res = [];
+      let i = j = 0;
+      let n = matrix.length - 1;
+      if (n < 0) return [];
+      let m = matrix[0].length - 1;
+
+      let turn = m === 0 ? 'd' : 'r';
+      let left = 0;
+      let right = m;
+      let top = 0;
+      let bottom = n;
+
+      for (let k = 0; k < (m+1)*(n+1); k++) {
+        res.push(matrix[i][j]);
+        if (turn === 'r') {
+          j++;
+          if (j === right) {
+            top++;
+            turn = 'd';
+          }
+        } else if (turn === 'd') {
+          i++;
+          if (i === bottom) {
+            right--;
+            turn = 'l';
+          }
+        } else if (turn === 'l') {
+          j--;
+          if (j === left) {
+            bottom--;
+            turn = 'u';
+          }
+        } else if (turn === 'u') {
+          i--;
+          if (i === top) {
+            left++;
+            turn = 'r';
+          }
+        }
+      }
+      return res;
+    }
+    console.log(spiralOrder(matrix));
+  </script>
+</body>
+</html>

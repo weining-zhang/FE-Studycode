@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1、原生版本
+    Function.prototype.myBind = function (thisArg) {
+      thisArg = thisArg || window
+      thisArg.fn = this
+      let args = [...arguments].slice(1)
+      return function F() {
+        const bindArgs = [...args, ...arguments]
+        if (this instanceof F) {
+          return new thisArg.fn(...bindArgs)
+        } else {
+          return thisArg.fn(...bindArgs)
+        }
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区1：
+
+
+    // 2、使用apply版本
+    Function.prototype.myBind = function() {
+      var fn = this // 保存原函数
+      var context = [].shift.call(arguments) // 保存需要绑定的this上下文
+      var args = [].slice.call(arguments) // 保存剩余参数，并转成数组
+      return function() { // 返回一个新函数
+        let bindArgs = [...args, ...arguments]
+        fn.apply(context, bindArgs)
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区2：
+
+
+    // 测试区：
+    var name = 'globalName'
+    function A() {
+      console.log(this.name)
+    }
+    A()
+    A.myBind({name: 'objName'})()
+
+  </script>
+</body>
+</html>

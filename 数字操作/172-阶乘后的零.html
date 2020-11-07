@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/factorial-trailing-zeroes/
+      思路：https://leetcode-cn.com/problems/factorial-trailing-zeroes/solution/zhao-5de-bei-shu-by-tang-dou-s/
+     */
+    let n = 5; // output 1
+
+    function trailingZeroes(n) {
+      if (n < 5)
+        return 0;
+      else {
+        let k = n / 5 | 0;
+        return k + trailingZeroes(k);
+      }
+    }
+    console.log(trailingZeroes(n));
+  </script>
+</body>
+</html>

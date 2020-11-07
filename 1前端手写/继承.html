@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 一、原型链继承：关键-> 子类的原型为父类的一个实例对象
+     * 缺点：
+     * ● 无法实现多继承
+     * ● 来自原型对象的所有属性被所有实例共享
+     * ● 创建子类实例时无法向父类构造函数传参  <-
+     * ● 要想为子类新增属性和方法，必须要在Student.prototype = new Person() 之后执行，不能放到构造器中
+     */
+    function Father(name) {
+      this.name = name
+    }
+
+    function Son(age) {
+      this.age = age
+    }
+    Son.prototype = new Father('john')
+    let s1 = new Son(20)
+    console.log(s1)
+
+
+    /**
+     * 二、构造函数继承：关键-> 在子类型构造函数中使用call()调用父类型构造函数
+     * 缺点：
+     * ● 实例并不是父类的实例，只是子类的实例
+     * ● 只能继承父类的实例属性和方法，不能继承父类原型属性和方法  <-
+     * ● 无法实现函数复用，每个子类都有父类实例函数的副本，影响性能  <-
+     */
+    function A(age) {
+      this.age = age
+    }
+
+    function B(name, age) {
+      A.call(this, age)
+      this.name = name
+    }
+    let stu1 = new B('构造函数继承', 21)
+    console.log(stu1.name, stu1.age)
+
+
+    /**
+     * 三、寄生组合式继承
+     * ● 可以继承父类所有原型的属性和方法
+     * ● 可以给父类构造函数传参
+     */
+    function Parent(name) {
+      this.name = name
+    }
+
+    function Child(name, age) {
+      Parent.call(this, name) // 这里是构造函数继承
+      this.age = age
+    }
+    // 核心代码
+    Child.prototype = Object.create(Parent.prototype) // 使用Object.create()
+    Child.prototype.constructor = Child // 重设原型对象后，应该同时重设构造器属性
+
+    let child = new Child('寄生组合继承', 22)
+    console.log(child.name, child.age)
+
+
+    /**
+     * 四、class继承
+     */
+    // 父类
+    class A2 {
+      constructor(name) {
+        this.name = name
+      }
+    }
+    // 子类
+    class B2 extends A2 {
+      constructor(name, age) {
+        super(name); // 通过super调用基类
+        this.age = age;
+      }
+    }
+    let child2 = new B2('kobe', 23)
+    console.log(child.name, child.age);
+  </script>
+</body>
+
+</html>

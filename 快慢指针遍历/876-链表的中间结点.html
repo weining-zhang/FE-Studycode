@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/middle-of-the-linked-list/
+     * https://leetcode-cn.com/problems/middle-of-the-linked-list/solution/lian-biao-de-zhong-jian-jie-dian-by-leetcode-solut/
+     * 思路：用两个指针 slow 与 fast 一起遍历链表。slow 一次走一步，fast 一次走两步。
+     *      那么当 fast 到达链表的末尾时，slow 必然位于中间。
+     */ 
+    function middleNode(head) {
+      let fast = slow = head;
+      while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+      }
+      return slow;
+    }
+  </script>
+</body>
+</html>

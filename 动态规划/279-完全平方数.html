@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/perfect-squares/solution/hua-jie-suan-fa-279-wan-quan-ping-fang-shu-by-guan/
+      
+      # dp[i]：表示完全平方数和为i的 最小个数
+      # 初始状态dp[i]均取最大值i，即 1+1+...+1，i个1; dp[0] = 0
+      # dp[i] = min(dp[i], dp[i-j*j]+1)，其中, j是平方数, j=1~k,其中k*k要保证 <= i
+      # 意思就是：完全平方数和为i的 最小个数 等于 当前完全平方数和为i的 最大个数
+      #   与 （完全平方数和为 i - j * j 的 最小个数 + 完全平方数和为 j * j的 最小个数）
+      #   可以看到 dp[j*j] 是等于1的
+    */
+    var numSquares = function (n) {
+      let dp = new Array(n + 1).fill(0);
+      for (let i = 1; i <= n; i++) {
+        dp[i] = i;
+        for (let j = 1; j * j <= i; j++) {
+          dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+        }
+      }
+      return dp[n];
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function pathSum(root, sum) {
+      if (!root) return 0;
+      let page = findDown(root, sum);
+      let sum1 = pathSum(root.left, sum);
+      let sum2 = pathSum(root.right, sum);
+      return page + sum1 + sum2;
+    }
+    
+    function findDown(node, sum) {
+      if (!node) return 0;
+      let flag = node.val === sum ? 1 : 0;
+      let sumL = findDown(node.left, sum - node.val);
+      let sumR = findDown(root.right, sum - node.val);
+      return flag + sumL + sumR;
+    }
+  </script>
+</body>
+</html>

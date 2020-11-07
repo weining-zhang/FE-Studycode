@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/set-matrix-zeroes/
+      思路：https://leetcode-cn.com/problems/set-matrix-zeroes/solution/ju-zhen-zhi-ling-94100-by-caifeng123/
+     */
+    let matrix = [
+      [1, 1, 1],
+      [1, 0, 1],
+      [1, 1, 1]
+    ];
+
+    function setZeroes(matrix) {
+      let rows = {};
+      let columns = {};
+
+      for (let i = 0; i < matrix.length; i++)
+        for (let j = 0; j < matrix[0].length; j++)
+          if (matrix[i][j] === 0) {
+            rows[i] = false;
+            columns[j] = false;
+          }
+
+      for (let i = 0; i < matrix.length; i++)
+        for (let j = 0; j < matrix[0].length; j++)
+          if (rows[i] === false || columns[j] === false)
+            matrix[i][j] = 0;
+
+      return matrix;
+    }
+    console.log(setZeroes(matrix));
+  </script>
+</body>
+</html>

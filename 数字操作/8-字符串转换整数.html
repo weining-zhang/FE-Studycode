@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/string-to-integer-atoi/solution/javascripttou-ji-qu-qiao-wu-xu-si-kao-yi-kan-jiu-h/
+     */
+    // let string = '42'
+    // let string = '-42' //第一个非空白字符为 '-', 它是一个负号。
+    // let string = '-91283472332' //数字 "-91283472332" 超过 32 位有符号整数范围,因此返回 INT_MIN (−231) 。
+    let string = '4193 with words' //转换截止于数字 '3' ，因为它的下一个字符不为数字。
+    // let string = 'words and 987' //第一个非空字符是 'w', 但它不是数字或正、负号。
+
+    function myAtoi(str) {
+      let number = parseInt(str, 10);
+      if (isNaN(number)) {
+        return 0;
+      } else if (number < Math.pow(-2, 31) || number > Math.pow(2, 31) - 1) {
+        return number < Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
+      } else {
+        return number;
+      }
+    }
+    console.log(myAtoi(string));
+  </script>
+</body>
+</html>

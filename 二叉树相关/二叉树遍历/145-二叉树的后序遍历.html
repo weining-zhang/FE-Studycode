@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      同二叉树前序、中序遍历
+      https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
+    */
+    function postorderTraversal(root) {
+      let res = [];
+      function help(node) {
+        if (node) {
+          help(node.left);
+          help(node.right);
+          res.push(node.val);
+        }
+      }
+      help(root);
+      return res;
+    }
+  </script>
+</body>
+</html>

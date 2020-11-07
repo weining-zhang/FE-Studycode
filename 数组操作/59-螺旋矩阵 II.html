@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/spiral-matrix-ii/
+      思路：https://leetcode-cn.com/problems/spiral-matrix-ii/solution/luo-xuan-ju-zhen-ii-93100-by-caifeng123/
+    */
+    let n = 3;
+
+    function generateMatrix(n) {
+      let arr = new Array(n);
+      for (let i = 0; i < n; i++) {
+        arr[i] = new Array(n);
+      }
+
+      let left = 0;
+      let right = n-1;
+      let top = 0;
+      let bottom = n-1;
+
+      for (let k = 1, i = j = 0, turn = 'r'; k <= n*n; k++) {
+        arr[i][j] = k;
+        if (turn === 'r') {
+          j++;
+          if (j === right) {
+            top++;
+            turn = 'd';
+          }
+        } else if (turn === 'd') {
+          i++;
+          if (i === bottom) {
+            right--;
+            turn = 'l';
+          }
+        } else if (turn === 'l') {
+          j--;
+          if (j === left) {
+            bottom--;
+            turn = 'u';
+          }
+        } else if (turn === 'u') {
+          i--;
+          if (i === top) {
+            left++;
+            turn = 'r';
+          }
+        }
+      }
+
+      return arr;
+    }
+    console.log(generateMatrix(n));
+  </script>
+</body>
+</html>

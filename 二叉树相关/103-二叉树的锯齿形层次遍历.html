@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
+      思路：
+      1.https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/yan-du-you-xian-gong-shi-ji-zhu-jiu-hui-yong-la-ma/
+      2.递归https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/solution/jsdi-gui-by-chenchangyuan-2/
+     */
+    
+    // 1.递归：偶数层从左至右，奇数层从右至左
+    function zigzagLevelOrder (root) {
+      if (!root)  return [];
+      let res = [];
+
+      function dfs(i, root) {
+        if(!root) return;
+        if (!res[i])  res[i] = [];
+        if (i & 1)  res[i].unshift(root.val);
+        else  res[i].push(root.val); 
+        dfs(i+1, root.left);
+        dfs(i+1, root.right);
+      }
+      dfs(0, root);
+      return res;
+    }
+
+    // 2.广度优先搜索
+    function zigzagLevelOrder(root) {
+      if (!root)  return [];
+      let res = [];
+      let arr = [root]; // 用来保留当前行和下一行从左至右的所有节点
+      let isOdd = false;  // 是否为奇数行
+
+      while (arr.length) {
+        let len = arr.length; // 记录当前行的长度，以区分下一行
+        let row = []; // 用来保留当前行按该行顺序输出的节点
+
+        if (!isOdd) {
+          while (len--) {
+            let node = arr.shift();
+            row.push(node.val);
+            if (node.left)  arr.push(node.left);
+            if (node.right) arr.push(node.right);
+          }
+          res.push(row);
+        } else {
+          while (len--) {
+            let node = arr.shift();
+            row.unshift(node.val);
+            if (node.left)  arr.push(node.left);
+            if (node.right) arr.push(node.right);
+          }
+          res.push(row);
+        }
+        isOdd = !isOdd;
+      }
+      return res;
+    }
+  </script>
+</body>
+</html>

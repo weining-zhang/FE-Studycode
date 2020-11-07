@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Function.prototype.myCall = function (thisArg) {
+      thisArg =  thisArg || window
+      thisArg.fn = this
+      const args = [...arguments].slice(1)
+      const res = thisArg.fn(...args)
+      delete thisArg.fn
+      return res
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+    
+    function add(a, b) {
+      console.log(this, a + b);
+    }
+    add(1, 3)
+    add.myCall({a: 10, b: 8}, 2, 4)
+
+  </script>
+</body>
+</html>

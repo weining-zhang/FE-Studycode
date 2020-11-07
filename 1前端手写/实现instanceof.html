@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://juejin.im/post/6856419501777846279
+     */
+    function myInstanceof(left, right) {
+      left = left.__proto__
+      right = right.prototype
+      while (true) {
+        if (!left) return false
+        if (left === right) return true
+        left = left.__proto__
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+  </script>
+</body>
+</html>

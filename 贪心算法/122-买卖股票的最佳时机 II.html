@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/
+      思路：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/solution/tan-xin-suan-fa-jian-dan-jie-jue-by-averey/
+    */
+    function maxProfit(prices) {
+      let profit = 0;
+      for (let i = 0; i < prices.length; i++) {
+        if (prices[i+1] > prices[i])  profit += prices[i+1] - prices[i];
+      }
+
+      return profit;
+    }
+  </script>
+</body>
+</html>

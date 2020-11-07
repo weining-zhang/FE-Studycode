@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
+      思路：https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/javascriptde-di-gui-jie-fa-yo-by-zero0011/
+      
+      1.两个数异或：相当于每一位相加，而不考虑进位； 
+      2.两个数相与，并左移一位：相当于求得进位； 
+      3.将上述两步的结果相加 
+     */
+    let a = 1, b =2;
+
+    function add(a, b) {
+      if (!a) return b;
+      if (!b) return a;
+      return add(a ^ b, (a & b) << 1)
+    }
+    console.log(add(a, b));
+  </script>
+</body>
+</html>

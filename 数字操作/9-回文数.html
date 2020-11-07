@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  https://leetcode-cn.com/problems/palindrome-number/
+     *  回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+     * 
+     *  思路： 先将数字转成字符串A，再经过变成数组，数组反转，
+     *        数组变成字符串B三步操作之后，比较字符串A和B，得出结论。
+     */
+    function isPalindrome(x) {
+      return x.toString() === x.toString().split('').reverse().join('')
+    }
+    console.log(isPalindrome(-1221));
+  </script>
+</body>
+</html>

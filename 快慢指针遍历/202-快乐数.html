@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/happy-number/
+     * https://leetcode-cn.com/problems/happy-number/solution/202kuai-le-shu-javascript-ti-jie-by-ldq-2/
+     * 思路：就是利用set.has()判断重复, 就return false
+     */
+    const n = 19;
+
+    function isHappy(n) {
+      let set = new Set();
+      let sum;
+      n += '';
+
+      while (sum !== 1) {
+        sum = 0;
+        for (let num of n) 
+          sum += num * num;
+        n = sum + '';
+        if (set.has(sum)) return false;
+        set.add(sum);
+      }
+      return true;
+    }
+    console.log(isHappy(n));
+  </script>
+</body>
+</html>

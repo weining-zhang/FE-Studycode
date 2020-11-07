@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/diameter-of-binary-tree/
+      思路：https://leetcode-cn.com/problems/diameter-of-binary-tree/solution/javascriptshen-du-you-xian-bian-li-dfs-guan-fang-t/
+     */
+    function diameterOfBinaryTree(root) {
+      let res = 1;
+
+      function depth(root) {
+        if (!root)  return 0;
+        let L = depth(root.left);
+        let R = depth(root.right);
+        res = Math.max(res, L + R + 1);
+
+        return Math.max(L, R) + 1;
+      }
+      depth(root);
+      return res - 1;
+    }
+  </script>
+</body>
+</html>

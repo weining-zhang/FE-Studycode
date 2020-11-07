@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://zhuanlan.zhihu.com/p/141809274
+    */
+    function jsonp({url, param, callback}) {
+      let script = document.createElement('script')
+      script.src = `${url}?${param}&callback=${jsonpCallback}`
+      script.type = 'text/javascript'
+      document.body.appendChild(script)
+
+      window[jsonpCallback] = function(res) {
+        callback && callback(res)
+        document.body.removeChild(script)
+        delete window[jsonpCallback]
+      }
+
+      script.onerror = function() { // 异常处理
+        window[jsonpCallback] = function() {
+          callback && callback('Error happened')
+          document.body.removeChild(script)
+          delete window[jsonpCallback]
+        }
+      }
+    }
+//----------------------------------------------------------------------------------------------    
+    // 练习区：
+    
+    
+  </script>
+</body>
+</html>

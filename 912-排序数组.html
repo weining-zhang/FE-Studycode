@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排序</title>
+</head>
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/sort-an-array/solution/5chong-chang-yong-pai-xu-suan-fa-by-jsyt/
+     */
+    const nums = [4, 9, 8, 1, 5, 3];
+    
+    /**
+     * 1.冒泡排序：两两交换，每轮排好一个最大/最小的
+     */
+    function bubbleSort(nums) {
+      for (let i = nums.length-1; i >= 0; i--) 
+        for (let j = 0; j < i; j++) 
+          if (nums[j] > nums[j+1])
+            [nums[j], nums[j+1]] = [nums[j+1], nums[j]];
+
+      return nums;
+    }
+    console.log(bubbleSort(nums));
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+
+    /**
+     * 2.快速排序
+     */
+    function quickSort(nums) {
+      return recursive(nums, 0, nums.length - 1);
+    }
+
+    // 递归排序基数左右两边的序列
+    function recursive(arr, left, right) {
+      if (arr.length === 1) return arr;
+      if (left >= right) return;
+      // console.log(left, right);
+      let index = partition(arr, left, right);
+      // console.log(arr);
+      recursive(arr, left, index - 1);
+      recursive(arr, index + 1, right);
+      return arr;
+    }
+
+    // 将小于基数的数放到基数左边，大于基数的数放到基数右边，并返回基数的位置
+    function partition(arr, left, right) {
+      // 取第一个数为基数
+      let temp = arr[left];
+      while (left !== right) {
+        while (left < right && arr[right] >= temp) right--;
+        arr[left] = arr[right];
+        while (left < right && arr[left] <= temp) left++;
+        arr[right] = arr[left];
+      }
+      // 这一轮调换结束，在left = right的位置补上基数
+      // arr[right] = temp;
+      arr[left] = temp;
+      return left;
+    }
+    console.log(quickSort(nums)); 
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+    
+
+    /**
+     * 3.选择排序：每轮选出未排序中最小的依次排好
+     */
+    function selectionSort(nums) {
+      for (let i = 0; i < nums.length; i++) {
+        let min = Infinity;
+        let minIndex;
+        
+        for (let j = i; j < nums.length; j++) {
+          if (nums[j] < min) {
+            min = nums[j];
+            minIndex = j;
+          }
+        }
+        [nums[i], nums[minIndex]] = [nums[minIndex], nums[i]]
+      }
+      return nums;
+    }
+    console.log(selectionSort(nums));
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+
+    </script>
+</body>
+</html>

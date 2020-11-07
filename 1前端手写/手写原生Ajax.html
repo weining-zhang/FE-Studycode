@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      http://conardli.top/blog/article/浏览器和网络/全面分析前端的网络请求方式%EF%BC%88一%EF%BC%89ajax.html#五、原生ajax的用法
+      1. get请求
+    */
+    var xhr = new XMLHttpRequest()
+    xhr.open('get', 'http://152.136.185.210:8000/api/w6/home/multidata', true)
+    // 接收返回值
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+          document.body.innerHTML = xhr.responseText
+          // console.log(xhr.responseText)
+        }
+      }
+    }
+    xhr.send()
+//-------------------------------------------------------------------------------------------
+    // 练习区1：
+
+
+
+    /* 
+      2. post请求
+    */
+    var xhr2 = new XMLHttpRequest()
+    xhr2.open('post', 'www.xxx.com', true)
+    // 接收返回值
+    xhr2.onreadystatechange = function() {
+      if (xhr2.readyState === 4) {
+        if (xhr2.status >= 200 && xhr2.status < 300 || xhr2.status === 304) {
+          console.log(xhr2.responseText)
+        }
+      }
+    }
+
+    // 处理请求参数
+    postData = {'name1': 'value1', 'name2': 'value2'}
+    postData = (function (param) {
+      var dataString = ''
+      for (var key in param) {
+        dataString += `${key}=${param[key]}&`
+      }
+      return dataString
+    })(postData)
+
+    // 设置请求头，注意：post请求一定要设置请求头的格式内容!
+    xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+    // 异常处理
+    xhr2.onerror = function() {
+      console.log('Network request failed');
+    }
+    // 允许跨域携带cookie
+    xhr2.withCredentials = true
+    // 发出请求
+    xhr2.send(postData)  // post请求参数放在send里面，post请求时才使用字符串参数，否则不用带参数。
+//---------------------------------------------------------------------------------------------
+    // 练习区2：
+
+    
+  </script>
+</body>
+</html>

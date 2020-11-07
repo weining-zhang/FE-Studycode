@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      思路：https://leetcode-cn.com/problems/unique-paths/solution/62-bu-tong-lu-jing-cong-omnkong-jian-dao-onkong-ji/
+      
+      https://leetcode-cn.com/problems/unique-paths/solution/62-bu-tong-lu-jing-by-alexer-660/
+     */
+    let m = 7, n = 3;
+
+    function uniquePaths(m, n) {
+      let dp = new Array(n).fill(1);
+
+      for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+          dp[j] += dp[j-1];
+        }
+      }
+
+      return dp[n-1];
+    }
+    console.log(uniquePaths(m, n));
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/rotate-list/
+     * 思路：
+     * 第一次循环:
+     *  1) 记录链表长度n
+     *  2) 让链表闭合形成环形链表
+     * 
+     * 第二次循环:
+     *  1) 去重k = k % n，通过循环 n-k>0 找到打断环的位置
+     *  2) 然后在该指针处打断环形链表, 头结点向前一步，此时return头部节点就是答案
+     * 
+     * 示例 1:
+     * 输入: 1->2->3->4->5->NULL, k = 2
+     * 输出: 4->5->1->2->3->NULL
+     * 解释:
+     * 向右旋转 1 步: 5->1->2->3->4->NULL
+     * 向右旋转 2 步: 4->5->1->2->3->NULL
+     */ 
+    function rotateRight(head, k) {
+      if (!head) return null
+      let len = 0
+      let cur = head
+      let temp
+      while (++len && cur.next) cur = cur.next
+      // 形成环链表
+      cur.next = head
+      k = k % len // 去重
+      while (++k < len) head = head.next // 找到打断位置
+      temp = head
+      head = head.next
+      temp.next = null
+      return head
+    }
+  </script>
+</body>
+</html>

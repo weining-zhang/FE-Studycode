@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/number-of-1-bits/
+     * https://leetcode-cn.com/problems/number-of-1-bits/solution/191-wei-1de-ge-shu-by-alexer-660/
+     * 思路：n与n-1做一次与(&)运算，就消掉一个1，最后n变成全0，消掉1的个数就是二进制的1的个数。
+     */
+    function numberOf1(n) {
+      let count = 0;
+      while(n) {
+        count++;
+        n &= n-1;
+      }
+      return count;
+    }
+
+    console.log(numberOf1(10)); 
+  </script>
+</body>
+</html>

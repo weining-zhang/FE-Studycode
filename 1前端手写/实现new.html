@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function myNew() {
+      let obj = {}; // 创建空对象
+      let Con = [].shift.call(arguments); // 获取构造函数
+      obj.__proto__ = Con.prototype; // 连接原型
+      let res = Con.apply(obj, arguments) // 绑定this
+      return res instanceof Object ? res : obj;
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+  </script>
+</body>
+</html>

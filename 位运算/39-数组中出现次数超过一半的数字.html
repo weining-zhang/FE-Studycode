@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/
+     * 思路：用一个辅助数组记录元素出现的次数，遍历数组，
+     *       每次循环并判断这个元素出现次数是否大于数组长度的一半.
+     */ 
+    const numbers = [1,2,3,2,2,2,5,4,2];
+
+    function overHalf(arr) {
+      const times = []
+      for (let i = 0; i < arr.length; i++) {
+        if (!times[arr[i]]) 
+          times[arr[i]] = 1;
+        else 
+          times[arr[i]]++;
+        if (times[arr[i]] > (nums.length >> 1)) 
+          return arr[i];
+      }
+      return;
+    }
+
+    console.log(overHalf(numbers));
+  </script>
+</body>
+
+</html>

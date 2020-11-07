@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/valid-parentheses/
+      思路：https://leetcode-cn.com/problems/valid-parentheses/solution/javascript-you-xiao-de-gua-hao-by-rhinoc/
+     */
+    let s = "()[]{}";
+    // let s = "{[]}";
+    // let s = "([)]";
+
+    function isValid(s) {
+      while (s.length) {
+        let temp = s;
+        s = s.replace('()', '')
+        s = s.replace('[]', '')
+        s = s.replace('{}', '')
+        if (s === temp) return false;
+      }
+      return true;
+    }
+    console.log(isValid(s));
+  </script>
+</body>
+</html>

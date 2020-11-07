@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/add-two-numbers/
+    */
+    let l1 = [2, 4, 3];
+    let l2 = [5, 6, 4];
+
+    function ListNode(val) {
+      this.val = val;
+      this.next = null;
+    }
+
+    function addTwoNumbers(l1, l2) {
+      let l3 = new ListNode(null);
+      let temp = l3;
+      let sum = 0;
+      let add = 0; // 标记是否进位
+
+      while (l1 || l2) {
+        sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + add;
+        add = sum >= 10 ? 1 :0;
+        temp.next = new ListNode(sum % 10);
+        temp = temp.next;
+        l1 && (l1 = l1.next);
+        l2 && (l2 = l2.next);
+      }
+      add && (temp.next = new ListNode(add));
+      return l3.next;
+    }
+    console.log(addTwoNumbers(l1, l2));
+  </script>
+</body>
+</html>

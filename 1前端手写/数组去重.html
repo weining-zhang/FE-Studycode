@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let array = [1, 1, 2, 4, 7, 5]
+
+    // 1.使用对象的属性不会重复的特性
+    function unique_4(arr) {
+      let res = [];
+      let obj = {};
+      for (let i of arr) {
+        if (!obj[i]) {
+          res.push(i);
+          obj[i] = 1;
+        }
+      }
+      return res;
+    }
+    console.log(unique_4(array));
+
+    // 2.使用Set
+    let unique_1 = arr => [...new Set(arr)]
+    console.log(unique_1(array));
+
+    // 3.使用filter方法
+    function unique_2(arr) {
+      let res = arr.filter((item, index) => arr.indexOf(item) === index)
+      return res
+    }
+    console.log(unique_2(array));
+
+    // 4.使用es6的Map
+    function unique_5(arr) {
+      let map = new Map();
+      return arr.filter(item => !map.has(item) && map.set(item, 1));
+    }
+    console.log(unique_5(array));
+
+    // 5.使用reduce方法
+    let unique_3 = arr => arr.reduce((acc, cur) => acc.includes(cur) ? acc : [...acc, cur], [])
+    console.log(unique_3(array));
+  </script>
+</body>
+
+</html>

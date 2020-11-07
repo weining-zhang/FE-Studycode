@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
+    */
+    let stack1 = []
+    let stack2 = []
+
+    function push(value) {
+      stack1.push(value)
+    }
+
+    function pop() {
+      while (stack1.length) {
+        stack2.push(stack1.pop())
+      }
+      return stack2.pop()
+    }
+  </script>
+</body>
+</html>

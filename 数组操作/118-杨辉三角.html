@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/pascals-triangle/
+      思路：https://leetcode-cn.com/problems/pascals-triangle/solution/javascript-ban-ben-by-raymond-yan/
+     */
+    let numRows = 5;
+
+    function generate(numRows) {
+      let res = [];
+      if (numRows < 1) return [];
+
+      for (let i = 0; i < numRows; i++) {
+        let row = [];
+        for (let j = 0; j <= i; j++) {
+          if (j > 0 && j < i)
+            row.push(res[i-1][j-1] + res[i-1][j])
+          else
+            row.push(1);
+        }
+        res.push(row);
+      }
+
+      return res;
+    }
+    console.log(generate(numRows));
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1.class实现
+    class Single {
+      // 构造器
+      constructor() {}
+      
+      static getInstance() {
+        // 判断是否存在
+        if (!Single.instance) {
+          // 不存在则创建
+          Single.instance = new Single();
+        }
+        // 存在则返回
+        return Single.instance;
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+    
+    let a = Single.getInstance();
+    let b = Single.getInstance();
+    console.log(a === b);
+
+    // 2.构造函数实现
+    function Single2() {
+      if (!this.instance) {
+        this.instance = new Single()
+      } else {
+        return this.instance
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+
+    let c = Single2.instance
+    let d = Single2.instance
+    console.log(c === d);
+
+  </script>
+</body>
+</html>
