@@ -1,0 +1,17 @@
+.container {
+  /* min-height: 600px; */
+}
+
+.left {
+  float: left;
+  height: 300px;
+  width: 300px;
+  background-color: red;
+}
+
+.right {
+  height: 300px;
+  /* margin-left: 300px; */
+  overflow: hidden;
+  background-color: blue;
+}

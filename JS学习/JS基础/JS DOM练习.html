@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p>请点击按钮来显示日期。</p>
+    <button onclick="displayDate()">时间是？</button>
+    <p id="demo"></p> -->
+    
+    <p>Hello World!</p>
+    <p>Hello China!</p>
+    <p id="demo"></p>
+
+    <script>
+        // function displayDate() {
+        //     let int = setInterval("clock()",1);
+        // }
+        // function clock() {
+        //     let t= new Date()
+        //     document.getElementById("demo").innerHTML= t
+        // }
+
+        let myCollection = document.getElementsByTagName("p");
+        document.getElementById("demo").innerHTML = `此文档包含   ${myCollection.length}   段文字。`;
+        
+    </script>
+</body>
+</html>

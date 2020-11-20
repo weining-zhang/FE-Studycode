@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>div无限旋转</title>
+  <style>
+    @keyframes rotate {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(180deg);
+      }
+    }
+
+    .rotate {
+      width: 100px;
+      height: 100px;
+      background-color: black;
+      margin: 0 auto;
+      margin-top: 200px;
+      animation: rotate 2s linear infinite;
+      /*开始动画后无限循环，用来控制rotate*/
+    }
+  </style>
+</head>
+
+<body>
+  <div class="rotate"></div>
+</body>
+
+</html>
