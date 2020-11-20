@@ -9,7 +9,7 @@
   <script>
     // 1.防抖
     function debounce(fn, wait) {
-      let timer;
+      var timer;
       return function () {
         if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
@@ -17,13 +17,31 @@
         }, wait)
       }
     }
+    // 2. 防抖（优化立即执行
+    function debounce(fn, wait, immediate) {
+      var timer
+      return function() {
+        if (timer) clearTimeout(timer)
+        if (immediate) {
+          var callNow = !timer // 通过一个变量来记录是否立即执行
+          timer = setTimeout(() => {
+            timer = null
+          }, wait)
+          if (callNow) fn.apply(this, arguments)
+        } else {
+          timer = setTimeout(() => {
+            fn.apply(this, arguments)
+          }, wait)
+        }
+      }
+    }
 //-------------------------------------------------------------------------------------------
     // 练习区：
-    
 
+    
     // 2.节流
     function throttle(fn, wait) {
-      let canRun = true;
+      var canRun = true;
       return function () {
         if (!canRun) return;
         canRun = false;

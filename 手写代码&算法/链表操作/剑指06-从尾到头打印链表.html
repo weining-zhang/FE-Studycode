@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
+    */
+    function reversePrint(head) {
+      let p = head
+      let res = []
+      while (p) {
+        res.unshift(p.val)
+        p = p.next
+      }
+      return res
+    }
+  </script>
+</body>
+</html>

@@ -66,7 +66,23 @@
     console.log(quickSort(nums)); 
 //-------------------------------------------------------------------------------------------
     // 练习区：
+    function quickSort2(arr) {
+      if (arr.length <= 1) return arr
+      let pivotIndex = arr.length >> 1
+      let pivot = arr.splice(pivotIndex, 1)[0];
 
+      let left = []
+      let right = []
+      for (let num of arr) {
+        if (num < pivot) {
+          left.push(num)
+        } else {
+          right.push(num)
+        }
+      }
+      return [...quickSort2(left), pivot, ...quickSort2(right)]
+    }
+    console.log(quickSort2(nums));
     
 
     /**

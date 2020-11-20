@@ -16,7 +16,15 @@
      */
     let money = '123456789'
 
-    function RMB(str) {
+    // 方法一
+    function formatCash(str) {
+      return str.split('').reduce((acc, cur, index) => acc + ((index % 3) ? cur : (',' + cur)))
+    }
+    console.log(formatCash(money));
+    
+
+    // 方法二
+    function formatCash2(str) {
       let arr = str.split('').reverse();
       let res = [];
 
@@ -28,7 +36,8 @@
       }
       return res.join('');
     }
-    console.log(RMB(money));
+    console.log(formatCash2(money));
+    
   </script>
 </body>
 

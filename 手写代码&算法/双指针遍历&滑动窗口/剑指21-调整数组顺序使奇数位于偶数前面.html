@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
+      思路：https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/solution/javascriptjs-lei-si-kuai-pai-de-zhi-zhen-si-lu-by-/
+     */
+    // 1.开辟新空间：时间复杂度 O(N), 空间复杂度 O(N)
+    function exchange(nums) {
+      const arrOdd = []  
+      const arrEven = []
+      for (let num of nums) {
+        if (num & 1) {
+          arrOdd.push(num)
+        } else {
+          arrEven.push(num)
+        }
+      }
+      return [...arrOdd, ...arrEven]
+    }
+
+    // 2.双指针解法：时间复杂度是 O(N), 空间复杂度是 O(1)
+    function exchange1(nums) {
+      if (!nums.length) return []
+      let left = 0, right = nums.length - 1
+      while (left < right) {
+        if (nums[left] & 1) {
+          left++
+        } else {
+          [nums[left], nums[right]] = [nums[right], nums[left]]
+          right--
+        }
+      }
+      return nums
+    }
+    
+    nums = [1,2,3,4]
+    console.log(exchange(nums));
+    console.log(exchange1(nums));
+  </script>
+</body>
+</html>

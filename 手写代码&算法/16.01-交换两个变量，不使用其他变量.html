@@ -9,26 +9,33 @@
 
 <body>
   <script>
-    let arr = [1, 4]
+    let a = 7, b = 1
 
     // 1.利用ES6解构赋值
-    function swapNumbers(numbers) {
-      [numbers[0], numbers[1]] = [numbers[1], numbers[0]]
-      return numbers;
+    function swapNumbers(a, b) {
+      [a, b] = [b, a]
+      return [a, b];
     }
-    console.log(swapNumbers(arr));
+    console.log(swapNumbers(a, b));
 
     // 2.利用加减法
-    // function swapNumbers(numbers) {
-    //   numbers[0] = numbers[0] + numbers[1];
-    //   numbers[1] = numbers[0] - numbers[1];
-    //   numbers[0] = numbers[0] - numbers[1];
-    //   return numbers;
-    // }
-    // console.log(swapNumbers(arr));
+    function swapNumbers2(a, b) {
+      a = a + b
+      b = a - b
+      a = a - b
+      return [a, b];
+    }
+    console.log(swapNumbers2(a, b));
 
-    // 3.利用数组反转（取巧）
-    // console.log(arr.reverse());
+    // 3.利用位运算(异或^)
+    function swapNumbers3(a, b) {
+      a ^= b
+      b ^= a
+      a ^= b
+      return [a, b]
+    }
+    console.log(swapNumbers3(a, b));
+
   </script>
 </body>
 
