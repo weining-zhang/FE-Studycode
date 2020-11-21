@@ -347,9 +347,9 @@
 // console.log(circle2);
 
 
-//构造函数
+// //构造函数
 // function Circle(radius) {
-//     this.radis = radius;
+//     this.radius = radius;
 //     this.draw = function() {
 //         console.log('draw');
 //     }
@@ -410,7 +410,6 @@
 
 // 工厂函数
 // let rec1 = recTangle(2, 5);  
-
 // console.log(rec1);
 
 // function recTangle(width, height) {
@@ -500,7 +499,7 @@
 // // numbers.unshift(1, 2);
 
 // // //中间指定位置插入,splice方法第一个参数是第几个(0开始)元素，第二个参数是删除几个元素，后面参数是从第一个参数位置插入的数据
-// // //splice方法会改变原数组，是直接在原数组上操作,返回被删除的元素组成的一个数组
+// // //splice方法会改变原数组，是直接在原数组上操作，返回被删除的元素组成的一个数组
 // numbers.splice(2, 0, 'a', 'b')
 
 // console.log(numbers);
@@ -572,7 +571,7 @@
 
 // //删除指定位置的元素
 
-// const middle = numbers.splice(2,2);  //第一个参数是从序号几的元素开始，第二个参数是删除几个元素
+// const middle = numbers.splice(2,2);  // 第一个参数是从序号几的元素开始，第二个参数是删除几个元素
                                         // 若只给第一个参数，则删除第一个参数序号及其之后的所有元素
 
 // console.log(numbers);
@@ -901,7 +900,7 @@
 
 // 默认参数值：ES6之后可直接在参数后赋值，即是它的默认值，注意：给参数默认值时，
 //            要么这个参数是所有参数的最后一个，要么它后面所有的参数都要给默认值
-// function interest(principal, rate = 3.5, years = 5) {
+// function interest(principal, rate = 3, years = 5) {
 //   return principal * rate / 100 * years;
 // }
 
