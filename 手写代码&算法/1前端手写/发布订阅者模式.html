@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     /* 
       https://www.jianshu.com/p/d26ddd4ff692
      */
+    let event = {
+      arr: [],
+      on(fn) {
+        this.arr.push(fn)
+      },
+      emit() {
+        this.arr.forEach(item => item())
+      }
+    }
+
+    let person = new Map()
+
+    // 订阅消息
+    event.on(() => {
+      console.log("一个任务执行完")
+      if (person.size === 2) {
+        console.log(person)
+        console.log("所有任务执行完")
+      }
+    })
+
+    setTimeout(() => {
+      person.set('name', 'welnee')
+      //发布消息
+      event.emit()
+    }, 1000)
+
+    setTimeout(() => {
+      person.set('age', 21)
+      //发布消息
+      event.emit()
+    }, 200)
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+    
   </script>
 </body>
+
 </html>

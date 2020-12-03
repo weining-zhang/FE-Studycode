@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
+      思路：https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/solution/javascriptdi-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-by-/
+     */
+    function firstUniqChar(s) {
+      if (!s) return ' '
+      let map = new Map()
+
+      for (let str of s) {
+        if (map.has(str)) {
+          map.set(str, map.get(str) + 1)
+        } else {
+          map.set(str, 1)
+        }
+      }
+      for (let s of map.keys()) {
+        if (map.get(s) === 1) return s
+      }
+      
+      return ' '
+    }
+  </script>
+</body>
+</html>

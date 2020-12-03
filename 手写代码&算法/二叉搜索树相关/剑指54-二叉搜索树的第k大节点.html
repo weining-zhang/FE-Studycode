@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+      思路：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/solution/xun-xu-jian-jin-xiang-xi-zhu-shi-by-cchroot-9/
+      
+      -> 利用反中序遍历
+     */
+    function kthLargest(root, k) {
+      let res = []
+
+      function dfs(root) {
+        if (root) {
+          dfs(root.right)
+          res.push(root.val)
+          dfs(root.left)
+        }
+      }
+      dfs(root)
+
+      return res[k-1]
+    }
+  </script>
+</body>
+</html>
