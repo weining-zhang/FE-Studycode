@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/
+      思路：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/solution/shuang-zhi-zhen-by-nalituo-3/
+    */
+    function twoSum(nums, target) {
+      let i = 0
+      let j = nums.length - 1
+      while (i !== j) {
+        let sum = nums[i] + nums[j]
+        if (sum > target) j--
+        if (sum < target) i++
+        if (sum === target) return [nums[i], nums[j]]
+      }
+    }
+  </script>
+</body>
+</html>

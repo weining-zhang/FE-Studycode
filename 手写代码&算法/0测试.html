@@ -20,7 +20,17 @@
 <body>
   <div class="test"></div>
   <script>
-    
+    let nums = [2,7,11,15], target = 9
+    var twoSum = function (nums, target) {
+      let map = new Map()
+      for (let num of nums) {
+        let diff = target - num
+        if (map.has(num)) return [map.get(num), num]
+        map.set(num, diff)
+        console.log(map);
+      }
+    };
+    console.log(twoSum(nums, target));
   </script>
 </body>
 
