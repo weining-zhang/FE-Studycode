@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/balanced-binary-tree/
+      思路：https://leetcode-cn.com/problems/balanced-binary-tree/solution/javascriptping-heng-er-cha-shu-by-user7746o/
+    */
+    function isBalanced(root) {
+      return balanced(root) !== -1
+    }
+
+    function balanced(root) {
+      if (!root) return 0
+      let left = balanced(root.left)
+      let right= balanced(root.right)
+      if (left === -1 || right === -1 || Math.abs(left - right) > 1) {
+        return -1
+      }
+      return Math.max(left, right) + 1
+    }
+  </script>
+</body>
+</html>
