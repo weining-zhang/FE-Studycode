@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
+      思路：https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/hua-dong-chuang-kou-zhi-jsban-by-hui-118/
+     */
+    let target = 9
+    function findContinuousSequence(target) {
+      let res =[]
+      let left = 1
+      let right = 1
+      let sum = 0
+
+      while (left < target / 2) {
+        if (sum < target) {
+          sum += right
+          right++
+        } else if (sum > target) {
+          sum -= left
+          left++
+        } else {
+          let arr = []
+          for (let i = left; i < right; i++) {
+            arr.push(i)
+          }
+          res.push(arr)
+          sum -= left
+          left++
+        }
+      }
+      return res
+    }
+    console.log(findContinuousSequence(target));
+  </script>
+</body>
+</html>
