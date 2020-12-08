@@ -10,7 +10,19 @@
     /* 
       https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/
       思路：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solution/li-yong-chai-zhi-pan-duan-by-qing-jiao-wo-xiao-bai/
-      排除数组中的0后，数组中最大数与最小数之差不能超过4，数组中除了0也不能有重复的数字
+
+      依据题意数组需要满足：
+
+      1.除 0 以外，数组最大数与最小数之差不能超过 4 ；因为长度为 5 的数组里数字若是连续的必定满足这一条件（不理解的同学可以自己试试枚举连续的 5 个数字出来）
+      2.除 0 以外，数组中不能有相同的数字
+
+      故解题思路为：
+
+      1.要直接获取数组 最大数 与 最小数 ，就必须将数组进行排序
+      2.以上条件都需要除去 0 ，故使用了数组的 filter方法 将数组中的 0 过滤掉
+      3.获取到 最大数 与 最小数 之后，判断它们的差是否大于 4 ，大于 4 则不符题意，返回 false
+      4.遍历一次新数组判断是否有重复的数字，有重复则不符题意，返回 false
+      5.以上都判断都通过，说明符合题意，返回 true
     */
     function isStraight(nums) {
       nums = nums.sort((a, b) => a - b).filter(item => item !== 0)
