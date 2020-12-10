@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+      思路：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/solution/chao-jian-dan-3xing-dai-ma-di-gui-javapythonjavasc/
+    */
+    function lowestCommonAncestor(root, p, q) {
+      if ((root.val - p.val) * (root.val - q.val) <= 0) return root
+      if (p.val < root.val) return lowestCommonAncestor(root.left, p, q)
+      return lowestCommonAncestor(root.right, p, q)
+    }
+  </script>
+</body>
+</html>
