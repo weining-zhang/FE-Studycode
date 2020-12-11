@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
+      思路：https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/qian-xu-zhong-xu-zhong-jian-er-cha-shu-fen-zhi-si-/
+      
+      * Definition for a binary tree node.
+      * function TreeNode(val) {
+      *     this.val = val;
+      *     this.left = this.right = null;
+      * }
+     */
+    function buildTree(preorder, inorder) {
+      if (!preorder.length || !inorder.length)  return null
+
+      let rootVal = preorder[0]
+      let node = new TreeNode(rootVal)
+
+      let i = 0
+      for (; i < inorder.length; i++) {
+        if (inorder[i] === rootVal) break;
+      }
+
+      node.left = buildTree(preorder.slice(1, i + 1), inorder.slice(0, i))
+      node.right = buildTree(preorder.slice(i + 1), inorder.slice(i + 1))
+      return node
+    }
+  </script>
+</body>
+</html>
