@@ -1,17 +1,17 @@
 ## :clipboard:目录
-* #### :bookmark:前端手写代码&算法相关
+#### :bookmark:前端手写代码&算法相关
   * [前端相关手撕代码](https://github.com/weining-zhang/FE-Studycode/tree/main/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%26%E7%AE%97%E6%B3%95/1%E5%89%8D%E7%AB%AF%E6%89%8B%E5%86%99)
   * [Leetcode算法](https://github.com/weining-zhang/FE-Studycode/tree/main/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%26%E7%AE%97%E6%B3%95)
   
   
-* #### :bookmark:Javascript学习
+#### :bookmark:Javascript学习
   * [JS基础](https://github.com/weining-zhang/FE-Studycode/blob/main/JS%E5%AD%A6%E4%B9%A0/JS%E5%9F%BA%E7%A1%80/JS%E5%AD%A6%E4%B9%A0%26%E7%AC%94%E8%AE%B0.js)
   * [JS OOP](https://github.com/weining-zhang/FE-Studycode/blob/main/JS%E5%AD%A6%E4%B9%A0/JS%E5%9F%BA%E7%A1%80/JS%20OOP%E5%AD%A6%E4%B9%A0.js)
   * [尾递归优化（柯里化）](https://github.com/weining-zhang/FE-Studycode/tree/main/JS%E5%AD%A6%E4%B9%A0/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96)
   * [Promise & Fetch](https://github.com/weining-zhang/FE-Studycode/tree/main/JS%E5%AD%A6%E4%B9%A0/Promise%26Fetch)
   
   
-* #### :bookmark:CSS练习
+#### :bookmark:CSS练习
   * [两栏布局](https://github.com/weining-zhang/FE-Studycode/tree/main/CSS%E7%BB%83%E4%B9%A0/%E4%B8%A4%E6%A0%8F%E5%B8%83%E5%B1%80)
   
   * [三栏布局](https://github.com/weining-zhang/FE-Studycode/tree/main/CSS%E7%BB%83%E4%B9%A0/%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80)
