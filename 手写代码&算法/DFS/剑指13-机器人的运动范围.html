@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
+      思路：https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/solution/shi-ji-xing-gao-ding-jian-dan-yi-du-by-tyy-12/
+     */
+    function movingCount(m, n, k) {
+      let sum = x => x % 10 + Math.floor(x / 10)
+      let flag = []
+      judge(0, 0, m, n, k, flag)
+      return flag.filter(item => item === true).length
+
+      function judge(i, j, m, n, k, flag) {
+        if (i < 0 || i >= m || j < 0 || j >= n || (sum(i) + sum(j)) > k || flag[i * n + j] === true)  return
+        flag[i * n + j] = true
+        judge(i - 1, j, m, n, k, flag)
+        judge(i + 1, j, m, n, k, flag)
+        judge(i, j - 1, m, n, k, flag)
+        judge(i, j + 1, m, n, k, flag)
+      }
+    }
+  </script>
+</body>
+</html>
