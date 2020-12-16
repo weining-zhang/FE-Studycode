@@ -10,6 +10,7 @@
     /* 
       https://leetcode-cn.com/problems/jian-sheng-zi-lcof/
       思路：https://leetcode-cn.com/problems/jian-sheng-zi-lcof/solution/shuang-jie-fa-dong-tai-gui-hua-tan-xin-fa-fu-zha-2/
+            https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/solution/jian-sheng-zi-ii-shu-xue-gui-lu-de-zui-you-jie-by-/
      */
 
     // 1.动态规划
@@ -36,6 +37,18 @@
       if (b === 0) return Math.pow(3, a);
       if (b === 1) return Math.pow(3, a - 1) * 4;
       if (b === 2) return Math.pow(3, a) * 2;
+    }
+
+    // 3.利用数学规律
+    function cuttingRope(n) {
+      let arr =[0, 0, 1, 2, 4]
+      if (n < 5)  return arr[n]
+      let res = 1
+      while (n >= 5) {
+        res = res * 3
+        n -= 3
+      }
+      return res * n
     }
   </script>
 </body>
