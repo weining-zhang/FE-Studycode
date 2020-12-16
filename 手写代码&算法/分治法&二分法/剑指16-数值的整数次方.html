@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
+      思路：https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/solution/tu-jie-tu-xie-zheng-li-3chong-jie-fa-bif-er-fen-fa/
+    */
+    function myPow(x, n) {
+      const res = absMyPow(x, Math.abs(n))
+      return n > 0 ? res : 1 / res
+
+      function absMyPow(x, n) {
+        if (n === 0)  return 1
+        if (n === 1)  return x
+
+        const res = absMyPow(x, n / 2 | 0)
+        return n & 1 ? x * res ** 2 : res ** 2
+      }
+    }
+  </script>
+</body>
+</html>
