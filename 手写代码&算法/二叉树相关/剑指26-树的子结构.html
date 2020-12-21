@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/
+      思路：https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/tu-jie-di-gui-javascriptshi-xian-by-xin-tan/
+     */
+    function isSubStructure(A, B) {
+      if (!A || !B) return false
+      return isSubTree(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B)
+
+      function isSubTree(rootA, rootB) {
+        if (!rootB) return true
+        if (!rootA) return false
+        if (rootA.val !== rootB.val) return false
+
+        return isSubTree(rootA.left, rootB.left) && isSubTree(rootA.right, rootB.right)
+      }
+    }
+  </script>
+</body>
+</html>
