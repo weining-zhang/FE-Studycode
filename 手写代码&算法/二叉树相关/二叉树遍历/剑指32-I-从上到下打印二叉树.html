@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
+      思路：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/solution/jie-zhu-dui-lie-jin-xing-ceng-xu-bian-li-javascrip/
+    */
+    function levelOrder(root) {
+      if (!root)  return []
+
+      const res = []
+      const queue = [root]
+
+      while (queue.length) {
+        let first = queue.shift()
+        res.push(first.val)
+        first.left && queue.push(first.left)
+        first.right && queue.push(first.right)
+      }
+
+      return res
+    }
+  </script>
+</body>
+</html>
