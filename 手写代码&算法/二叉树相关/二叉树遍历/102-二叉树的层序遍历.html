@@ -11,24 +11,38 @@
       https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
       思路：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/102er-cha-shu-de-ceng-ci-bian-li-javascript-ti-jie/
       https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/yan-du-you-xian-sou-suo-by-shetia/
+      
+      输入示例：
+          3
+         / \
+        9  20
+          /  \
+         15   7
+      输出示例：
+        [
+          [3],
+          [9,20],
+          [15,7]
+        ]
      */
     function levelOrder(root) {
       if (!root) return [];
       let res = [];
-      let q = [root];
+      let queue = [root];
+      let level = 0
 
-      while (q.length) {
-        let arr = [];
-        let len = q.length;
-        while (len) {
-          let node = q.shift();
-          arr.push(node.val);
-          if (node.left) q.push(node.left);
-          if (node.right) q.push(node.right);
-          len--;
+      while (queue.length) {
+        res[level] = []
+        let levelNum = queue.length;
+        while (levelNum--) {
+          let first = queue.shift();
+          res[level].push(first.val);
+          first.left && queue.push(first.left);
+          first.right && queue.push(first.right);
         }
-        res.push(arr);
+        level++
       }
+
       return res;
     }
   </script>

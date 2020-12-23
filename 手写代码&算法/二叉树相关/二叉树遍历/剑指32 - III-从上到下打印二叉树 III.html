@@ -10,6 +10,19 @@
     /* 
       https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
       思路：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/solution/si-lu-jian-dan-gen-ju-ceng-shu-lai-jin-xing-revers/
+
+      输入示例：
+          3
+         / \
+        9  20
+          /  \
+         15   7
+      输出示例：遍历顺序为 -> 一行从左到右，一行从右到左
+        [
+          [3],
+          [20,9],
+          [15,7]
+        ]
      */
     function levelOrder(root) {
       if (!root)  return []
