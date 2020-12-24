@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/
+      思路：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/solution/javascriptshi-xian-kao-cha-er-cha-sou-suo-shu-de-t/
+    */
+    function verifyPostorder(postorder) {
+      let len = postorder.length
+      if (len <= 1) return true
+
+      let root = postorder[len - 1]
+      let leftNum = 0
+      for (; postorder[leftNum] < root; leftNum++) {}
+      for (let i = leftNum; i < len - 1; i++) {
+        if (postorder[i] < root)  return false
+      }
+
+      return verifyPostorder(postorder.slice(0, leftNum)) && verifyPostorder(postorder.slice(leftNum, len - 1))
+    }
+  </script>
+</body>
+</html>
