@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
+      思路：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/solution/zhao-qu-jian-zhao-shu-zi-zhao-wei-zhi-javascript-b/
+     */
+    function findNthDigit(n) {
+      if (n < 10) return n;
+      let i = 1; //几位数
+      let num = 9;
+      while (n >= num) {
+        n -= num;
+        i++;
+        num = 9 * 10 ** (i - 1) * i;
+      }
+      n--; //变为下标
+      let start = 10 ** (i - 1) + parseInt(n / i) + '';
+      return start[n % i];
+    }
+  </script>
+</body>
+
+</html>
