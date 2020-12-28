@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
+      思路：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/solution/yi-xing-gao-xing-neng-de-dai-ma-javascript-by-tang/
+    */
+    function minNumber(nums) {
+      return nums.sort((a, b) => ('' + a + b) - ('' + b + a)).join('')
+    }
+  </script>
+</body>
+</html>
