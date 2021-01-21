@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/
+      思路：https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/solution/javascript-san-chong-fang-fa-di-gui-er-wei-dp-yi-w/
+    */
+  
+    // 二维dp 
+    function maxValue(grid) {
+      let rows = grid.length
+      if (!rows) return 0
+      let cols = grid[0].length
+      let dp = Array(rows).fill(0).map(item => Array(cols).fill(0))
+
+      for (let i = rows-1; i >= 0; i--) {
+        for (let j = cols-1; j >= 0; j--) {
+          let a = i + 1 >= rows ? 0 : dp[i+1][j]
+          let b = j + 1 >= cols ? 0 : dp[i][j+1]
+
+          dp[i][j] = grid[i][j] + Math.max(a, b)
+        }
+      }
+
+      return dp[0][0]
+    }
+
+    // 一维dp(优化版)
+    function maxValue(grid) {
+      let rows = grid.length
+      if (!rows) return 0
+      let cols = grid[0].length
+      let dp = Array(cols).fill(0)
+
+      for (let i = rows-1; i >= 0; i--) {
+        for (let j = cols-1; j >= 0; j--) {
+          let a = i + 1 >= rows ? 0 : dp[j]
+          let b = j + 1 >= cols ? 0 : dp[j+1]
+
+          dp[j] = grid[i][j] + Math.max(a, b)
+        }
+      }
+      
+      return dp[0]
+    }
+  </script>
+</body>
+</html>
