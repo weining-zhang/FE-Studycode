@@ -27,21 +27,7 @@
     }
 //--------------------------------------------------------------------------------------------    
     // 练习区：
-    function cloneDeep1(src) {
-      if (src instanceof Date) return new Date(src)
-      if (src instanceof RegExp) return new RegExp(src)
-      if (typeof src !== 'object' || src === null) return src
-      let target = Array.isArray(src) ? [] : {}
-      for (let key in src) {
-        if (typeof key === 'object') {
-          target[key] = cloneDeep1(src[key])
-        } else {
-          target[key] = src[key]
-        }
-      }
-
-      return target
-    }
+    
     
     // 测试区：
     var a = {
