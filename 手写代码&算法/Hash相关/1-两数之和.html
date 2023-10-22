@@ -11,6 +11,12 @@
     let target = 9;
     function twoSum(nums, target) {
       /**
+       * https://leetcode.cn/problems/two-sum/solutions/657225/tu-jie-guan-fang-tui-jian-ti-jie-liang-s-02xs/?envType=study-plan-v2&envId=top-100-liked
+       * 
+       * 根据题意，如果我们使用暴破，会导致时间复杂度为 n^2 ，这样的代价无疑是很大的。
+       * 所以我们很容易想到用哈希表来解决这个问题。
+       * 我们遍历到数字 a 时，用 target 减去 a，就会得到 b，若 b 存在于哈希表中，我们就可以直接返回结果了。若 b 不存在，那么我们需要将 a 存入哈希表，好让后续遍历的数字使用。
+       * 
        * 1.利用数组减少查询时间
        * 在暴力法中，内层循环查找差值很浪费时间，那么如何减少查询时间呢？利用数组就可以减少查询时间。
        * 使用一层循环，每遍历到一个元素就计算该元素与 target 之间的差值 dif，然后以 dif 为下标
@@ -21,10 +27,11 @@
       let temp = [];
       for (let i = 0; i < nums.length; i++) {
         let dif = target - nums[i];
-        if (temp[dif]) 
+        if (temp[dif] !== undefined) {
           return [temp[dif], i]
-        
-        temp[nums[i]] = i;
+        } else {
+          temp[nums[i]] = i;
+        }
       }
 
       /**
