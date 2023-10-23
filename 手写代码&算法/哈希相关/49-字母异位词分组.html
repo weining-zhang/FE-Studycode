@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+
+    var groupAnagrams = function(strs) {
+      /**
+       * https://leetcode.cn/problems/group-anagrams/solutions/520469/zi-mu-yi-wei-ci-fen-zu-by-leetcode-solut-gyoc/?envType=study-plan-v2&envId=top-100-liked
+       * 
+       * 由于互为字母异位词的两个字符串包含的字母相同，因此对两个字符串分别进行排序之后得到的字符串一定是相同的，故可以将排序之后的字符串作为哈希表的键。
+       * 
+       */
+
+      let map = new Map();
+
+      for (let s of strs) {
+        let arr = Array.from(s);
+        arr.sort();
+        let key = arr.toString();
+        let list = map.get(key) ? map.get(key) : [];
+        list.push(s);
+        map.set(key, list);
+      }
+
+      return Array.from(map.values());
+    }
+  </script>
+</body>
+</html>
