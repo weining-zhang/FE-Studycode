@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/move-zeroes/solutions/90229/dong-hua-yan-shi-283yi-dong-ling-by-wang_ni_ma/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 参考快排思想，把不等于0的移动到当前左边，等于0的放到右边
+     */
+
+    var moveZeroes = function(nums) {
+      if (!nums.length) return;
+
+      let j = 0;
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+          let tmp = nums[i];
+          nums[i] = nums[j];
+          nums[j] = tmp;
+          j++;
+        }
+      }
+    };
+  </script>
+</body>
+</html>
