@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  https://leetcode-cn.com/problems/3sum/
+     *  思路：
+     *  ● 先将数组进行排序
+     * 
+     *  ● 从左侧开始，选定一值nums[i]为定值 ，右侧进行求解，获取与其相加为 0 的两个值
+     *  ● 类似于快排，定义首和尾
+     *  ● 首尾与 定值 相加
+     *
+     *    1.等于 0，记录这三个值
+     *    2.小于 0，首部右移
+     *    3.大于 0，尾部左移
+     *
+     *  ● 定值右移，重复该步骤
+     * 
+     *  边界条件：
+     *  1、因nums[i]为最左侧最小值，nums[i] > 0时，sum不可能为0
+     *  2、nums[i] === nums[i−1]时，两个结果会相同，需跳过
+     *  3、sum = 0 后的判断：
+     *    - nums[L] === nums[L+1]，结果会重复，L++
+     *    - nums[R] === nums[R−1]，结果会重复，R--
+     */ 
+    const nums = [-1,0,1,2,-1,-4];
+
+    function threeSum(nums) {
+      nums.sort((a, b) => a - b);
+      let res = [];
+
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > 0) break;
+        if (nums[i] === nums[i-1]) continue;
+
+        let L = i + 1;
+        let R = nums.length - 1;
+
+        while (L < R) {
+          let sum = nums[i] + nums[L] + nums[R];
+          if (sum === 0) {
+            res.push([nums[i], nums[L], nums[R]]);
+            while (nums[L] === nums[L+1]) L++;
+            while (nums[R] === nums[R-1]) R--;
+            L++;
+            R--
+          } else if (sum < 0) {
+            L++;
+          } else if (sum > 0) {
+            R--;
+          }
+        }
+      }
+
+      return res;
+    }
+    console.log(threeSum(nums));
+  </script>
+</body>
+</html>
