@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
+     */
+
+    let s = "cbaebabacd";
+    let p = "abc";
+
+    var findAnagrams = function(s, p) {
+      let need = new Map();
+      let window = new Map();
+
+      for (let s of p) {
+        need.set(s, need.get(s) ? need.get(s) + 1 : 1);
+      }
+
+      let left = 0;
+      let right = 0;
+      let valid = 0;
+      let res = [];
+
+      while (right < s.length) {
+        let rightChar = s[right];
+        right++;
+
+        if (need.get(rightChar)) {
+          window.set(rightChar, window.get(rightChar) ? window.get(rightChar) + 1 : 1);
+          if (window.get(rightChar) === need.get(rightChar)) {
+            valid++;
+          }
+        }
+
+        while (right - left >= p.length) {
+          if (valid === need.size) {
+            res.push(left);
+          }
+
+          let leftChar = s[left];
+          left++;
+
+          if (need.get(leftChar)) {
+            if (window.get(leftChar) === need.get(leftChar)) {
+              valid--;
+            }
+            window.set(leftChar, window.get(leftChar) ? window.get(leftChar) - 1 : 1);
+          }
+        }
+      }
+
+      return res;
+    };
+
+    console.log(findAnagrams(s, p));
+  </script>
+</body>
+</html>
