@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/product-of-array-except-self/solutions/5736/cheng-ji-dang-qian-shu-zuo-bian-de-cheng-ji-dang-q/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     *  原数组：       [1       2       3       4]
+        左部分的乘积：   1       1      1*2    1*2*3
+        右部分的乘积：  2*3*4    3*4      4      1
+        结果：       1*2*3*4  1*3*4   1*2*4  1*2*3*1
+
+        从上面的图可以看出，当前位置的结果就是它左部分的乘积再乘以它右部分的乘积。因此需要进行两次遍历，第一次遍历用于求左部分的乘积，第二次遍历在求右部分的乘积的同时，再将最后的计算结果一起求出来
+     */ 
+
+    var productExceptSelf = function(nums) {
+      let res = [];
+      let pre = 1;
+
+      for (let i = 0; i < nums.length; i++) {
+        res[i] = pre;
+        pre = pre * nums[i];
+      }
+
+      pre = 1;
+
+      for (let i = nums.length - 1; i >= 0; i--) {
+        res[i] = res[i] * pre;
+        pre = pre * nums[i];
+      }
+
+      return res;
+    }
+  </script>
+</body>
+</html>
