@@ -9,6 +9,9 @@
   <script>
     /**
      * https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/3982/hua-dong-chuang-kou-by-powcai/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 滑动窗口框架：
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
      */ 
 
     var lengthOfLongestSubstring = function(s) {
@@ -28,6 +31,33 @@
       }
 
       return max;
+
+      /**
+       * 滑动窗口框架解法
+       */ 
+      // let map = new Map();
+
+      // let left = 0;
+      // let right = 0;
+      // let max = 0;
+
+      // while (right < s.length) {
+      //   let rightCr = s[right];
+      //   right++;
+
+      //   map.set(rightCr, map.get(rightCr) ? map.get(rightCr) + 1 : 1);
+
+      //   while (map.get(rightCr) > 1) {
+      //     let leftCr = s[left];
+      //     left++;
+
+      //     map.set(leftCr, map.get(leftCr) ? map.get(leftCr) - 1 : 1);
+      //   }
+
+      //   max = Math.max(max, right - left);
+      // }
+
+      // return max;
     };
   </script>
 </body>
