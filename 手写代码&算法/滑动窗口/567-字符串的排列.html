@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+
+    var checkInclusion = function(s1, s2) {
+      let need = new Map();
+      let window = new Map();
+      for (let s of s1) {
+        need.set(s, need.get(s) ? need.get(s) + 1 : 1);
+      }
+
+      let left = 0;
+      let right = 0;
+      let valid = 0;
+
+      while (right < s2.length) {
+        let rightCr = s2[right];
+        right++;
+
+        if (need.get(rightCr)) {
+          window.set(rightCr, window.get(rightCr) ? window.get(rightCr) + 1 : 1);
+          if (window.get(rightCr) === need.get(rightCr)) {
+            valid++;
+          }
+        }
+
+        while (right - left >= s1.length) {
+          let leftCr = s2[left];
+          left++;
+
+          if (valid === need.size) return true;
+
+          if (need.get(leftCr)) {
+            if (window.get(leftCr) === need.get(leftCr)) {
+              valid--;
+            }
+            window.set(leftCr, window.get(leftCr) ? window.get(leftCr) - 1 : 1);
+          }
+        }
+      }
+
+      return false;
+    };
+  </script>
+</body>
+</html>
