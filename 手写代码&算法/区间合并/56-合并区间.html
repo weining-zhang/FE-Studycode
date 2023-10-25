@@ -24,6 +24,11 @@
       按上面的方法解决合并 新问题就会出现了 --> 可能后一个包含了前一个
       【例如 1~4 2~3 按上面方法合并就会变成 1~3的情况 但明显不合题意 应当是1~4即前一项不动】
       因此在合并前需要进行判断 如果后一项的右边界<=前一项右边界 就跳过不动 反之则进行上述方法合并
+
+      边界条件：
+      1、n 右边界 >= n+1 左边界
+      2、n 右边界 >= n+1 右边界，跳过
+
      */
     
     const intervals = [[1,3],[2,6],[8,10],[15,18]]
@@ -45,6 +50,30 @@
       return res;
     }
     console.log(merge(intervals));
+
+    /**
+     *  https://leetcode.cn/problems/merge-intervals/solutions/487031/shou-hua-tu-jie-56he-bing-qu-jian-by-xiao_ben_zhu/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var merge = function(intervals) {
+      let res = [];
+      intervals.sort((a, b) => a[0] - b[0]);
+
+      let pre = intervals[0];
+
+      for (let i = 0; i < intervals.length; i++) {
+        let cur = intervals[i];
+
+        if (pre[1] >= cur[0]) {
+          pre[1] = Math.max(pre[1], cur[1]);
+        } else {
+          res.push(pre);
+          pre = cur;
+        }
+      }
+
+      res.push(pre);
+      return res;
+    }
   </script>
 </body>
 </html>
