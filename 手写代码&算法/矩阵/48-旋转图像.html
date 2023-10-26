@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/rotate-image/
+      思路：
+      1、https://leetcode-cn.com/problems/rotate-image/solution/zhao-gui-lu-jie-jue-fa-by-malenconiaprincep/
+      2、https://leetcode.cn/problems/rotate-image/solutions/526980/xuan-zhuan-tu-xiang-by-leetcode-solution-vu3m/
+
+      要点：
+      1、数组先通过 水平轴 翻转
+      2、再通过 主对角线 翻转
+     */
+    function rotate(matrix) {
+      // 思路1
+      // let len = matrix.length;
+
+      // for (let i = 0; i < len; i++) {
+      //   for (let j = i; j < len; j++) {
+      //     let temp = matrix[i][j];
+      //     matrix[i][j] = matrix[j][i];
+      //     matrix[j][i] = temp;
+      //   }
+      // }
+
+      // return matrix.map(item => item.reverse());
+
+      // 思路2
+      let n = matrix.length;
+
+      for (let i = 0; i < Math.floor(n / 2); i++) {
+        for (let j = 0; j < n; j++) {
+          let tmp = matrix[i][j];
+          matrix[i][j] = matrix[n - i - 1][j];
+          matrix[n - i - 1][j] = tmp;
+        }
+      }
+
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+          let tmp = matrix[i][j];
+          matrix[i][j] = matrix[j][i];
+          matrix[j][i] = tmp;
+        }
+      }
+
+      return matrix;
+    }
+  </script>
+</body>
+</html>
