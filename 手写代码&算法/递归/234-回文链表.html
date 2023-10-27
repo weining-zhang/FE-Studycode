@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/palindrome-linked-list/solutions/457312/di-gui-zhan-deng-3chong-jie-jue-fang-shi-zui-hao-d/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+
+    var isPalindrome = function(head) {
+      let tmp = head;
+      return check(head);
+
+      function check(head) {
+        if (head === null) return true;
+
+        let res = check(head.next) && (head.val === tmp.val);
+        tmp = tmp.next;
+
+        return res;
+      };
+    }
+  </script>
+</body>
+</html>
