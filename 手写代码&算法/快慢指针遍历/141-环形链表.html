@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/linked-list-cycle/
+
+      常见链表问题解法：
+      https://leetcode.cn/problems/linked-list-cycle/solutions/175734/yi-wen-gao-ding-chang-jian-de-lian-biao-wen-ti-h-2/?envType=study-plan-v2&envId=top-100-liked
+     */
+    function hasCycle(head) {
+      let fast = head;
+      let slow = head;
+
+      while (fast !== null) {
+        fast = fast.next;
+        if (fast !== null) fast = fast.next;
+
+        if (fast === slow) return true;
+
+        slow = slow.next;
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
