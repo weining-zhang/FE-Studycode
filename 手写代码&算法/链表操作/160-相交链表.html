@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/intersection-of-two-linked-lists/solutions/10774/tu-jie-xiang-jiao-lian-biao-by-user7208t/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     *  pA走过的路径为A链+B链
+
+        pB走过的路径为B链+A链
+
+        pA和pB走过的长度都相同，都是A链和B链的长度之和，相当于将两条链从尾端对齐，如果相交，则会提前在相交点相遇，如果没有相交点，则会在最后相遇。
+
+        pA:1->2->3->4->5->6->null->9->5->6->null
+        pB:9->5->6->null->1->2->3->4->5->6->null
+     */ 
+
+    var getIntersectionNode = function(headA, headB) {
+      let a = headA;
+      let b = headB;
+
+      while(a !== b) {
+        a = a === null ? headB : a.next;
+        b = b === null ? headA : b.next;
+      }
+
+      return a;
+    }
+  </script>
+</body>
+</html>
