@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/reverse-linked-list/solutions/36710/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var reverseList = function(head) {
+      let pre = null;
+      let cur = head;
+
+      while (cur !== null) {
+        let tmp = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = tmp;
+      }
+
+      return pre;
+    }
+  </script>
+</body>
+</html>
