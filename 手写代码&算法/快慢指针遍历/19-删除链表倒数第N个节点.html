@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solutions/7083/dong-hua-tu-jie-leetcode-di-19-hao-wen-ti-shan-chu/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+
+    function ListNode(val) {
+      this.val = val;
+      this.next = null;
+    }
+
+    function removeNthFromEnd(head, n) {
+      let pre = new ListNode(0);
+      pre.next = head;
+
+      let fast = pre;
+      let slow = pre;
+      for (let i = 0; i < n + 1; i++) {
+        fast = fast.next;
+      }
+
+      while (fast !== null) {
+        fast = fast.next;
+        slow = slow.next;
+      }
+
+      slow.next = slow.next.next;
+
+      return pre.next;
+    }
+  </script>
+</body>
+</html>
