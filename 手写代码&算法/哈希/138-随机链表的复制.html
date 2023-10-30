@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/copy-list-with-random-pointer/solutions/2361362/138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-b-6jeo/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+
+    function Node(val, next, random) {
+      this.val = val;
+      this.next = next;
+      this.random = random;
+    };
+    
+    var copyRandomList = function(head) {
+      let map = new Map();
+      let cur = head;
+
+      while (cur !== null) {
+        map.set(cur, new Node(cur.val));
+        cur = cur.next;
+      }
+
+      cur = head;
+      while (cur !== null) {
+        let node = map.get(cur);
+
+        node.next = map.get(cur.next) || null;
+        node.random = map.get(cur.random) || null;
+
+        cur = cur.next;
+      }
+
+      return map.get(head);
+    }
+  </script>
+</body>
+</html>
