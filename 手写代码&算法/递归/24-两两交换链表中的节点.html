@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/swap-nodes-in-pairs/solutions/444474/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-91/?envType=study-plan-v2&envId=top-100-liked，高赞评论
+     * https://leetcode.cn/problems/swap-nodes-in-pairs/solutions/7058/hua-jie-suan-fa-24-liang-liang-jiao-huan-lian-biao/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var swapPairs = function(head) {
+      if (head === null || head.next === null) return head;
+
+      let one = head;
+      let two = head.next;
+      let three = two.next;
+
+      two.next = one;
+      one.next = swapPairs(three);
+
+      return two;
+    }
+  </script>
+</body>
+</html>
