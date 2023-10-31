@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/maximum-depth-of-binary-tree/solutions/10740/hua-jie-suan-fa-104-er-cha-shu-de-zui-da-shen-du-b/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var maxDepth = function(root) {
+      if (!root) return 0;
+
+      let left = maxDepth(root.left);
+      let right = maxDepth(root.right);
+
+      return Math.max(left, right) + 1;
+    }
+  </script>
+</body>
+</html>
