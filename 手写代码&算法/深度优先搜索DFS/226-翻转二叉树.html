@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/invert-binary-tree/solutions/2361621/226-fan-zhuan-er-cha-shu-fen-zhi-qing-xi-tqlf/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var invertTree = function(root) {
+      if (!root) return null;
+
+      let tmp = root.left;
+      root.left = invertTree(root.right);
+      root.right = invertTree(tmp);
+
+      return root;
+    }
+  </script>
+</body>
+</html>
