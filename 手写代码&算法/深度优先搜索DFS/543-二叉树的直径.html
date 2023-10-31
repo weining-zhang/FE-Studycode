@@ -8,22 +8,25 @@
 <body>
   <script>
     /* 
-      https://leetcode-cn.com/problems/diameter-of-binary-tree/
       思路：https://leetcode-cn.com/problems/diameter-of-binary-tree/solution/javascriptshen-du-you-xian-bian-li-dfs-guan-fang-t/
+      https://leetcode.cn/problems/diameter-of-binary-tree/solutions/139683/er-cha-shu-de-zhi-jing-by-leetcode-solution/，高赞评论
      */
     function diameterOfBinaryTree(root) {
-      let res = 1;
+      let max = 0;
+
+      depth(root);
+      return max;
 
       function depth(root) {
-        if (!root)  return 0;
-        let L = depth(root.left);
-        let R = depth(root.right);
-        res = Math.max(res, L + R + 1);
+        if (root === null) return 0;
 
-        return Math.max(L, R) + 1;
+        let left = depth(root.left);
+        let right = depth(root.right);
+
+        max = Math.max(left + right, max);
+
+        return Math.max(left, right) + 1;
       }
-      depth(root);
-      return res - 1;
     }
   </script>
 </body>
