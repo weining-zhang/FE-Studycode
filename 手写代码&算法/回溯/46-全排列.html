@@ -8,26 +8,37 @@
 <body>
   <script>
     /* 
-      https://leetcode-cn.com/problems/permutations/
-      思路：https://github.com/sl1673495/leetcode-javascript/issues/68
+      https://leetcode.cn/problems/permutations/solutions/247052/chou-xiang-cheng-jue-ce-shu-yi-ge-pai-lie-jiu-xian/?envType=study-plan-v2&envId=top-100-liked
     */
     let nums = [1,2,3];
 
     function permute(nums) {
-      let n = nums.length;
-      if (n === 1) return [nums];
-
       let res = [];
-      for (let i = 0; i < n; i++) {
-        let use = nums[i];
-        let rest = nums.slice(0, i).concat(nums.slice(i+1, n));
-        let restPermutes = permute(rest);
-        for (restPermute of restPermutes) {
-          res.push(restPermute.concat(use));
+      let used = {};
+
+      function dfs(path) {
+        if (path.length === nums.length) {
+          res.push(path.slice());
+          return;
+        }
+
+        for (let num of nums) {
+          if (used[num]) continue;
+
+          path.push(num);
+          used[num] = true;
+
+          dfs(path);
+
+          path.pop();
+          used[num] = false;
         }
       }
+
+      dfs([]);
       return res;
     }
+
     console.log(permute(nums));
   </script>
 </body>
