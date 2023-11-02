@@ -9,8 +9,11 @@
   <script>
     /* 
       http://conardli.top/blog/article/JS进阶/如何写出一个惊艳面试官的深拷贝.html
+      https://github.com/mqyqingfeng/Blog/issues/32
       缺点：未解决循环引用问题
      */
+
+    // 深拷贝
     function cloneDeep(src) {
       if (src instanceof Date) return new Date(src)
       if (src instanceof RegExp) return new RegExp(src)
@@ -24,6 +27,19 @@
         }
       }
       return target
+    }
+
+    // 浅拷贝
+    function cloneShallow(obj) {
+      if (typeof obj !== 'object') return;
+
+      let newObj = Array.isArray(obj) ? [] : {};
+
+      for (let key in obj) {
+        newObj[key] = obj[key];
+      }
+
+      return newObj;
     }
 //--------------------------------------------------------------------------------------------    
     // 练习区：
