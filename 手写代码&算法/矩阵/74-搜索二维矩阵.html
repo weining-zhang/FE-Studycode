@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/search-a-2d-matrix-ii/solutions/118335/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-5-4/?envType=study-plan-v2&envId=top-100-liked，解法二
+     * 
+     * 同 240 题解法
+     */ 
+    var searchMatrix = function(matrix, target) {
+      let row = 0;
+      let col = matrix[0].length - 1;
+
+      while (row < matrix.length && col >= 0) {
+        if (matrix[row][col] < target) {
+          row++;
+        } else if (matrix[row][col] > target) {
+          col--;
+        } else {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
