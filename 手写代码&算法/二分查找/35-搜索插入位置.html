@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/search-insert-position/solutions/8017/hua-jie-suan-fa-35-sou-suo-cha-ru-wei-zhi-by-guanp/
+     */ 
+    var searchInsert = function(nums, target) {
+      let left = 0;
+      let right = nums.length - 1;
+
+      while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (nums[mid] === target) return mid;
+
+        if (nums[mid] > target) {
+          right = mid - 1;
+        } else {
+          left = left + 1;
+        }
+      }
+
+      return left;
+    }
+  </script>
+</body>
+</html>
