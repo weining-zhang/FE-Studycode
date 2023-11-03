@@ -10,24 +10,7 @@
     /* 
       http://conardli.top/blog/article/JS进阶/如何写出一个惊艳面试官的深拷贝.html
       https://github.com/mqyqingfeng/Blog/issues/32
-      缺点：未解决循环引用问题
      */
-
-    // 深拷贝
-    function cloneDeep(src) {
-      if (src instanceof Date) return new Date(src)
-      if (src instanceof RegExp) return new RegExp(src)
-      if (typeof src !== 'object' || src === null) return src
-      let target = Array.isArray(src) ? [] : {}
-      for (let key in src) {
-        if (typeof src[key] === 'object') {
-          target[key] = cloneDeep(src[key])
-        } else {
-          target[key] = src[key]
-        }
-      }
-      return target
-    }
 
     // 浅拷贝
     function cloneShallow(obj) {
@@ -41,6 +24,44 @@
 
       return newObj;
     }
+
+
+    // 深拷贝
+    function cloneDeep(obj) {
+      if (typeof obj !== 'object') return;
+
+      let newObj = Array.isArray(obj) ? [] : {};
+
+      for (let key in obj) {
+        if (typeof obj[key] === 'object') {
+          cloneDeep(obj[key]);
+        } else {
+          newObj[key] = obj[key];
+        }
+      }
+
+      return newObj;
+    }
+
+
+    // 解决深拷贝循环引用问题
+    // https://segmentfault.com/a/1190000020255831#item-6
+    function cloneDeep1(obj, map = new Map()) {
+      if (typeof obj !== 'object') return obj;
+
+      if (map.get(obj)) return map.get(obj);
+
+      let newObj = Array.isArray(obj) ? [] : {};
+      map.set(obj, newObj);
+
+      for (let key in obj) {
+        newObj[key] = cloneDeep1(obj[key], map);
+      }
+
+      return newObj;
+    }
+
+
 //--------------------------------------------------------------------------------------------    
     // 练习区：
     
