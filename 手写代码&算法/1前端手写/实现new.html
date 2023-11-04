@@ -7,13 +7,22 @@
 </head>
 <body>
   <script>
+    // https://github.com/mqyqingfeng/Blog/issues/13
+
     function myNew() {
       let obj = {}; // 创建空对象
-      let Con = [].shift.call(arguments); // 获取构造函数
-      obj.__proto__ = Con.prototype; // 连接原型
-      let res = Con.apply(obj, arguments) // 绑定this
-      return res instanceof Object ? res : obj;
+      let con = [].shift.call(arguments); // 获取外部传入的构造函数
+
+      obj.__proto__ = con.prototype; // 连接原型
+      let res = con.apply(obj, arguments) // 绑定this
+
+      return res === 'object' ? res : obj;
     }
+
+    function ff(name) {
+      this.name = name;
+    }
+    const f = mynew(ff);
 //-------------------------------------------------------------------------------------------
     // 练习区：
 
