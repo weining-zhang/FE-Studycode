@@ -8,23 +8,26 @@
 <body>
   <script>
     /* 
-      https://leetcode-cn.com/problems/valid-parentheses/
-      思路：https://leetcode-cn.com/problems/valid-parentheses/solution/javascript-you-xiao-de-gua-hao-by-rhinoc/
+      https://leetcode.cn/problems/valid-parentheses/solutions/9185/valid-parentheses-fu-zhu-zhan-fa-by-jin407891080/?envType=study-plan-v2&envId=top-100-liked
+      高赞评论 2019.10.25
      */
     let s = "()[]{}";
     // let s = "{[]}";
     // let s = "([)]";
 
-    function isValid(s) {
-      while (s.length) {
-        let temp = s;
-        s = s.replace('()', '')
-        s = s.replace('[]', '')
-        s = s.replace('{}', '')
-        if (s === temp) return false;
+    function isValid(str) {
+      let arr = [];
+
+      for (let s of str) {
+        if (s === '{') arr.push('}');
+        else if (s === '(') arr.push(')');
+        else if (s === '[') arr.push(']');
+        else if (s !== arr.pop()) return false;
       }
-      return true;
+
+      return arr.length;
     }
+
     console.log(isValid(s));
   </script>
 </body>
