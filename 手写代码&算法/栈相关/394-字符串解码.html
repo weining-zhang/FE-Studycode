@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/decode-string/solutions/264879/zhan-de-ji-yi-nei-ceng-de-jie-ma-liao-bie-wang-lia/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var decodeString = function(s) {
+      let numArr = [];
+      let strArr = [];
+      let num = 0;
+      let str = '';
+
+      for (let c of s) {
+        if (!isNaN(c)) {
+          num = num * 10 + Number(c);
+        } else if (c === '[') {
+          numArr.push(num);
+          num = 0;
+          strArr.push(str);
+          str = '';
+        } else if (c === ']') {
+          let mul = numArr.pop();
+          str = strArr.pop() + str.repeat(mul);
+        } else {
+          str += c;
+        }
+      }
+
+      return str;
+    }
+  </script>
+</body>
+</html>
