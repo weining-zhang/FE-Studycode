@@ -18,20 +18,20 @@
 
     class myPromise {
       constructor(executor) {
-        this.state = PENDING
+        this.status = PENDING
         this.value = undefined
         this.reason = undefined
         this.onResolvedCallbacks = []
         this.onRejectedCallbacks = []
 
         let resolve = (value) => {
-          this.state = RESOLVE
+          this.status = RESOLVE
           this.value = value
           this.onResolvedCallbacks.forEach(item => item())
         }
 
         let reject = (reason) => {
-          this.state = REJECT
+          this.status = REJECT
           this.reason = reason
           this.onRejectedCallbacks.forEach(item => item())
         }
@@ -44,14 +44,14 @@
       }
 
       then(onFulfilled, onRejected) {
-        if (this.state === RESOLVE) {
+        if (this.status === RESOLVE) {
           onFulfilled(this.value)
         }
-        if (this.state === REJECT) {
+        if (this.status === REJECT) {
           onRejected(this.reason)
         }
 
-        if (this.state === PENDING) {
+        if (this.status === PENDING) {
           this.onResolvedCallbacks.push(() => {
             onFulfilled(this.value)
           })
@@ -64,18 +64,23 @@
 
 //-------------------------------------------------------------------------------------------
     // 练习区：
-    
+
 
     // 测试：
-    let p1 = new myPromise2((resolve, reject) => {
+    let p1 = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(1)
       }, 1000);
     }).then(res => {
       console.log('success: '+ res);
+      return Promise.reject(222222);
+    }).then((res) => {
+      console.log(res);
+    }).catch((e) => {
+      console.log(e);
     })
 
-    let p2 = new myPromise2((resolve, reject) => {
+    let p2 = new myPromise((resolve, reject) => {
       setTimeout(() => {
         reject(2)
       }, 2000);
