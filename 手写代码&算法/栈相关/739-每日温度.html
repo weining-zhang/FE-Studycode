@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/daily-temperatures/solutions/283745/shou-hui-ti-jie-fang-da-guan-cha-dan-diao-zhan-si-/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var dailyTemperatures = function(t) {
+      let res = new Array(t.length).fill(0);
+      let stack = [];
+
+      for (let i = t.length - 1; i >= 0; i--) {
+        while (t[i] >= t[stack[stack.length - 1]]) {
+          stack.pop();
+        }
+
+        if (stack.length) {
+          res[i] = stack[stack.length - 1] - i;
+        }
+
+        stack.push(i);
+      }
+
+      return res;
+    }
+  </script>
+</body>
+</html>
