@@ -68,7 +68,7 @@
     // 练习区：
     function quickSort2(arr) {
       if (arr.length <= 1) return arr
-      let pivotIndex = arr.length >> 1
+      let pivotIndex = arr.length >> 1 // >>1 相当于除以2向下取整
       let pivot = arr.splice(pivotIndex, 1)[0];
 
       let left = []
