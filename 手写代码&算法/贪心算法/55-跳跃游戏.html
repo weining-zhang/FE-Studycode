@@ -8,18 +8,18 @@
 <body>
   <script>
     /* 
-      https://leetcode-cn.com/problems/jump-game/
       思路：https://leetcode-cn.com/problems/jump-game/solution/pythonjs-tan-xin-55-tiao-yue-you-xi-by-fe-lucifer/
+      https://leetcode.cn/problems/jump-game/solutions/24322/55-by-ikaruga/
     */
     var canJump = function(nums) {
       let max = 0;
 
       for (let i = 0; i < nums.length; i++) {
         if (max < i) return false;
-        max = Math.max(i + nums[i], max);
+        max = Math.max(max, i + nums[i]);
       }
 
-      return max >= nums.length-1;
+      return true;
     };
   </script>
 </body>
