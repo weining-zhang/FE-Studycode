@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 1、https://leetcode.cn/problems/climbing-stairs/solutions/9983/hua-jie-suan-fa-70-pa-lou-ti-by-guanpengchn/?envType=study-plan-v2&envId=top-100-liked
+     * 2、https://leetcode.cn/problems/climbing-stairs/solutions/270926/cong-zhi-jue-si-wei-fen-xi-dong-tai-gui-hua-si-lu-/?envType=study-plan-v2&envId=top-100-liked
+     */ 
+    var climbStairs = function(n) {
+      let cur = 1;
+      let pre = 1;
+
+      for (let i = 2; i <= n; i++) {
+        let tmp = cur;
+        cur = pre + cur;
+        pre = tmp;
+      }
+
+      return cur;
+    }
+  </script>
+</body>
+</html>
