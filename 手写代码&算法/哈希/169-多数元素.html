@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+     * 思路：map记录每个数字出现的次数，遍历过程中维护一个出现次数最多的数字
+     */ 
+    var majorityElement = function(nums) {
+      let map = new Map();
+      let max = nums[0];
+
+      for (let num of nums) {
+        map.set(num, map.get(num) ? map.get(num) + 1 : 1);
+
+        if (map.get(num) > map.get(max)) {
+          max = num;
+        }
+      }
+
+      return max;
+    }
+  </script>
+</body>
+</html>
