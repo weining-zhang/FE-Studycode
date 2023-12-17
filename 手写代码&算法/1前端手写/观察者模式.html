@@ -7,9 +7,67 @@
 </head>
 <body>
   <script>
-    /* 
-      https://www.jianshu.com/p/dc2e29c7d8c3
-     */
+    // 主题（Subject）
+    class Subject {
+      constructor() {
+        this.observers = []; // 存储观察者
+      }
+
+      // 添加观察者
+      addObserver(observer) {
+        this.observers.push(observer);
+      }
+
+      // 移除观察者
+      removeObserver(observer) {
+        this.observers = this.observers.filter(obs => obs !== observer);
+      }
+
+      // 通知观察者状态变化
+      notifyObservers(data) {
+        this.observers.forEach(observer => {
+          observer.update(data);
+        });
+      }
+    }
+
+    // 观察者（Observer）
+    class Observer {
+      constructor(name) {
+        this.name = name;
+      }
+
+      // 更新方法，用于接收主题的通知
+      update(data) {
+        console.log(`${this.name} received update: ${data}`);
+      }
+    }
+
+    // 示例使用
+    const subject = new Subject();
+
+    const observer1 = new Observer('Observer 1');
+    const observer2 = new Observer('Observer 2');
+
+    // 将观察者添加到主题
+    subject.addObserver(observer1);
+    subject.addObserver(observer2);
+
+    // 主题状态发生变化，通知所有观察者
+    subject.notifyObservers('New data 1');
+
+    // 移除 observer1
+    subject.removeObserver(observer1);
+
+    // 主题状态再次发生变化，通知剩下的观察者
+    subject.notifyObservers('New data 2');
+
+
+    //-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+    
   </script>
 </body>
 </html>
