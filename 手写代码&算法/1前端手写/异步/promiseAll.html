@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    function promiseAll(promises) {
+      if (!Array.isArray(promises)) {
+          return new Error(new TypeError('Promises must be an array'));
+        }
+
+      return new Promise((resolve, reject) => {
+        const results = [];
+        let completedPromises = 0;
+
+        promises.forEach((promise, index) => {
+          Promise.resolve(promise) // 也可以直接使用 promise.then，前提是保证传入的 promise 是 promise 对象
+            .then((result) => {
+              results[index] = result;
+              completedPromises++;
+
+              if (completedPromises === promises.length) {
+                resolve(results);
+              }
+            })
+            .catch(reject);
+        });
+      });
+    }
+
+    // 示例用法
+    const promise1 = Promise.resolve(1);
+    const promise2 = Promise.reject('Promise 2 rejected');
+    const promise3 = Promise.resolve(3);
+
+    promiseAll(promise1, promise2, promise3)
+      .then((results) => {
+        console.log('All promises resolved:', results);
+      })
+      .catch((error) => {
+        console.error('At least one promise rejected:', error);
+      });
+
+
+    //-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+
+  </script>
+</body>
+</html>
