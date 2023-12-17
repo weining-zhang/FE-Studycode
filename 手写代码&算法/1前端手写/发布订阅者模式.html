@@ -9,45 +9,68 @@
 
 <body>
   <script>
-    /* 
-      https://www.jianshu.com/p/d26ddd4ff692
-     */
-    let event = {
-      arr: [],
-      on(fn) {
-        this.arr.push(fn)
-      },
-      emit() {
-        this.arr.forEach(item => item())
+    // 发布者
+    class Publisher {
+      constructor() {
+        this.subscribers = {};
+      }
+
+      // 订阅
+      subscribe(event, callback) {
+        if (!this.subscribers[event]) {
+          this.subscribers[event] = [];
+        }
+        this.subscribers[event].push(callback);
+      }
+
+      // 取消订阅
+      unsubscribe(event, callback) {
+        if (this.subscribers[event]) {
+          this.subscribers[event] = this.subscribers[event].filter(subscriber => subscriber !== callback);
+        }
+      }
+
+      // 发布消息
+      publish(event, data) {
+        if (this.subscribers[event]) {
+          this.subscribers[event].forEach(subscriber => {
+            subscriber(data);
+          });
+        }
       }
     }
 
-    let person = new Map()
-
-    // 订阅消息
-    event.on(() => {
-      console.log("一个任务执行完")
-      if (person.size === 2) {
-        console.log(person)
-        console.log("所有任务执行完")
+    // 订阅者
+    class Subscriber {
+      constructor(name) {
+        this.name = name;
       }
-    })
 
-    setTimeout(() => {
-      person.set('name', 'welnee')
-      //发布消息
-      event.emit()
-    }, 1000)
+      // 订阅的回调函数
+      handleMessage(data) {
+        console.log(`${this.name} received message: ${data}`);
+      }
+    }
 
-    setTimeout(() => {
-      person.set('age', 21)
-      //发布消息
-      event.emit()
-    }, 200)
+    // 创建发布者实例
+    const publisher = new Publisher();
+
+    // 创建订阅者实例
+    const subscriber1 = new Subscriber('Subscriber 1');
+    const subscriber2 = new Subscriber('Subscriber 2');
+
+    // 订阅事件
+    publisher.subscribe('message', data => subscriber1.handleMessage(data));
+    publisher.subscribe('message', data => subscriber2.handleMessage(data));
+
+    // 发布消息
+    publisher.publish('message', 'Hello, subscribers!');
+
 //-------------------------------------------------------------------------------------------
     // 练习区：
 
-    
+
+
   </script>
 </body>
 
