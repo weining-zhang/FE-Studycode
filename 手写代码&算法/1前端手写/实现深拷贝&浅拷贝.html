@@ -47,7 +47,7 @@
     // 解决深拷贝循环引用问题
     // https://segmentfault.com/a/1190000020255831#item-6
     function cloneDeep1(obj, map = new WeakMap()) {
-      if (typeof obj !== 'object') return obj;
+      if (typeof obj !== 'object' || obj === null) return obj; // null 是基本数据类型，也需要返回
 
       if (map.get(obj)) return map.get(obj);
 
@@ -72,6 +72,9 @@
       book: {
         title: "You Don't Know JS",
         price: "45"
+      },
+      cycle: {
+        a
       },
       a1: undefined,
       a2: null,
