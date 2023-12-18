@@ -11,10 +11,12 @@
      * https://github.com/mqyqingfeng/Blog/issues/13
      * 
      * 要点：
-     * 1、能访问构造函数里的属性
-     * 2、能访问原型里的属性
+     * 1、new 嘛就是要创建一个新对象
+     * 2、新对象能访问原型里的方法属性，通过 Object.create
+     * 3、新对象能访问构造函数里的方法属性，通过 apply
      */
 
+    //  无形参版本
     function myNew() {
       let obj = {}; // 创建空对象
       let con = [].shift.call(arguments); // 获取外部传入的构造函数
@@ -22,15 +24,29 @@
       obj.__proto__ = con.prototype; // 连接原型
       let res = con.apply(obj, arguments) // 绑定this
 
-      return res === 'object' ? res : obj;
+      return typeof res === 'object' ? res : obj; // 使用 typeof 有个问题是：null 也为 true
     }
 
-    function ff(name) {
+    // 带形参版本
+    function myNew2(constructor, ...args) {
+      let obj = Object.create(constructor.prototype);
+
+      let res = constructor.apply(obj, args);
+
+      return res instanceof Object ? res : obj;
+    }
+
+
+    function Person(name) {
       this.name = name;
     }
-    const f = mynew(ff);
+    const person = myNew2(Person, 'bob');
+    console.log(person);
 //-------------------------------------------------------------------------------------------
     // 练习区：
+
+
+
 
 
   </script>
