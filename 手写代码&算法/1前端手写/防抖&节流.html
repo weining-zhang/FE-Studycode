@@ -8,51 +8,62 @@
 <body>
   <script>
     // 1.防抖
-    function debounce(fn, wait) {
-      var timer;
-      return function () {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          fn.apply(this, arguments)
-        }, wait)
+    function debounce(fn, delay) {
+      let timerId;
+
+      return function(...args) {
+        clearTimeout(timerId);
+
+        timerId = setTimeout(() => {
+          fn.apply(this, args)
+        }, delay);
       }
     }
-    // 2. 防抖（优化立即执行
-    function debounce(fn, wait, immediate) {
-      var timer
-      return function() {
-        if (timer) clearTimeout(timer)
-        if (immediate) {
-          var callNow = !timer // 通过一个变量来记录是否立即执行
-          timer = setTimeout(() => {
-            timer = null
-          }, wait)
-          if (callNow) fn.apply(this, arguments)
-        } else {
-          timer = setTimeout(() => {
-            fn.apply(this, arguments)
-          }, wait)
+
+    // 2. 防抖plus（可配置是否立即执行
+    function debounce(fn, delay, immediate) {
+      let timerId;
+
+      return function(...args) {
+        let callNow = immediate && !timerId;
+
+        clearTimeout(timerId);
+
+        if (callNow) {
+          fn.apply(this, args);
+        }
+
+        timerId = setTimeout(() => {
+          timerId = null;
+
+          !immediate && fn.apply(this, args);
+        }, delay);
+      }
+    }
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
+
+
+    // 2.节流
+    function throttle(fn, delay) {
+      let lastTime = 0;
+
+      return function(...args) {
+        let curTime = new Date().getTime();
+
+        if (curTime - lastTime >= delay) {
+          fn.apply(this, args);
+
+          lastTime = curTime;
         }
       }
     }
 //-------------------------------------------------------------------------------------------
     // 练习区：
-    
-    
-    // 2.节流
-    function throttle(fn, wait) {
-      var canRun = true;
-      return function () {
-        if (!canRun) return;
-        canRun = false;
-        setTimeout(() => {
-          fn.apply(this, arguments);
-          canRun = true;
-        }, wait)
-      }
-    }
-//-------------------------------------------------------------------------------------------
-    // 练习区：
+
+
 
 
   </script>
