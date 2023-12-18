@@ -31,6 +31,7 @@
 
     /**
      * 2.快速排序
+     * 方法一：
      */
     function quickSort(nums) {
       return recursive(nums, 0, nums.length - 1);
@@ -64,26 +65,38 @@
       return left;
     }
     console.log(quickSort(nums)); 
-//-------------------------------------------------------------------------------------------
-    // 练习区：
-    function quickSort2(arr) {
-      if (arr.length <= 1) return arr
-      let pivotIndex = arr.length >> 1 // >>1 相当于除以2向下取整
-      let pivot = arr.splice(pivotIndex, 1)[0];
 
-      let left = []
-      let right = []
+
+    /**
+     * 方法二: 适用于小规模数组
+     */
+    function quickSort2(arr) {
+      if (arr.length <= 1) return arr;
+
+      let pivotIdx = arr.length >> 1; // >>1 相当于除以2向下取整
+      let pivot = arr[pivotIdx];
+
+      let left = [];
+      let right = [];
+
       for (let num of arr) {
+        if (num === pivot) continue;
+
         if (num < pivot) {
-          left.push(num)
+          left.push(num);
         } else {
-          right.push(num)
+          right.push(num);
         }
       }
-      return [...quickSort2(left), pivot, ...quickSort2(right)]
+
+      return [...quickSort2(left), pivot, ...quickSort2(right)];
     }
     console.log(quickSort2(nums));
-    
+
+//-------------------------------------------------------------------------------------------
+    // 练习区：
+
+
 
     /**
      * 3.选择排序：每轮选出未排序中最小的依次排好
