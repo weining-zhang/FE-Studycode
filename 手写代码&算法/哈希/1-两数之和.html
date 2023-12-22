@@ -27,7 +27,7 @@
       let temp = [];
       for (let i = 0; i < nums.length; i++) {
         let dif = target - nums[i];
-        if (temp[dif] !== undefined) {
+        if (temp[dif] !== undefined) { // 必须用 !== undefined 是因为防止 temp[dif] = 0 被判断为false
           return [temp[dif], i]
         } else {
           temp[nums[i]] = i;
