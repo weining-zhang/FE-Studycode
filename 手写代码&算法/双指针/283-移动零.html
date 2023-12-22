@@ -13,10 +13,12 @@
      * 参考快排思想，把不等于0的移动到当前左边，等于0的放到右边
      */
 
+    const nums = [0,1,0,3,12];
+
     var moveZeroes = function(nums) {
       if (!nums.length) return;
 
-      let j = 0;
+      let j = 0; // 记录 0 的位置
       for (let i = 0; i < nums.length; i++) {
         if (nums[i] !== 0) {
           let tmp = nums[i];
