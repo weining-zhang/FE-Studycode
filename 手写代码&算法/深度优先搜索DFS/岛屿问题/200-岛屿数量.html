@@ -9,6 +9,11 @@
   <script>
     /**
      * https://leetcode.cn/problems/number-of-islands/solutions/211211/dao-yu-lei-wen-ti-de-tong-yong-jie-fa-dfs-bian-li-/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * dfs，类比二叉树dfs，两个要素：1、访问左右相邻节点 2、判断 base case
+     * 
+     * 要点：1、访问上下左右四个相邻节点
+     * 2、base case 是什么？超出网格范围的格子
      */ 
     var numIslands = function(grid) {
       let count = 0;
