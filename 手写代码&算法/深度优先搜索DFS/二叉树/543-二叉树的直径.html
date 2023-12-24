@@ -9,7 +9,7 @@
   <script>
     /* 
       思路：https://leetcode-cn.com/problems/diameter-of-binary-tree/solution/javascriptshen-du-you-xian-bian-li-dfs-guan-fang-t/
-      https://leetcode.cn/problems/diameter-of-binary-tree/solutions/139683/er-cha-shu-de-zhi-jing-by-leetcode-solution/，高赞评论
+      https://leetcode.cn/problems/diameter-of-binary-tree/solutions/139683/er-cha-shu-de-zhi-jing-by-leetcode-solution/，高赞评论 2020.03.10
      */
     function diameterOfBinaryTree(root) {
       let max = 0;
@@ -20,12 +20,12 @@
       function depth(root) {
         if (root === null) return 0;
 
-        let left = depth(root.left);
+        let left = depth(root.left); // 不含 root 的高度
         let right = depth(root.right);
 
         max = Math.max(left + right, max);
 
-        return Math.max(left, right) + 1;
+        return Math.max(left, right) + 1; // +1 是加上当前 root 的高度
       }
     }
   </script>
