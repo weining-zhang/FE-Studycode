@@ -9,6 +9,9 @@
   <script>
     /**
      * https://leetcode.cn/problems/island-perimeter/solutions/151724/tu-jie-jian-ji-er-qiao-miao-de-dfs-fang-fa-java-by/
+     * 
+     * 要点：1、岛屿的周长 = 岛屿方格 和 非岛屿方格 相邻的边的数量；非岛屿方格（水域方格、网格的边界）
+     * 2、从一个岛屿方格走向一个非岛屿方格，就将周长加 1
      */ 
     var islandPerimeter = function(grid) {
       for (let r = 0; r < grid.length; r++) {
