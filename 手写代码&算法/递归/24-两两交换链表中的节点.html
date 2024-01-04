@@ -10,6 +10,9 @@
     /**
      * https://leetcode.cn/problems/swap-nodes-in-pairs/solutions/444474/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-91/?envType=study-plan-v2&envId=top-100-liked，高赞评论
      * https://leetcode.cn/problems/swap-nodes-in-pairs/solutions/7058/hua-jie-suan-fa-24-liang-liang-jiao-huan-lian-biao/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 递归要点：
+     * 1、节点为空 或者 只有一个节点（无法再比较） 时结束递归
      */ 
     var swapPairs = function(head) {
       if (head === null || head.next === null) return head;
