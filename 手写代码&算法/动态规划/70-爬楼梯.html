@@ -12,16 +12,26 @@
      * 2、https://leetcode.cn/problems/climbing-stairs/solutions/270926/cong-zhi-jue-si-wei-fen-xi-dong-tai-gui-hua-si-lu-/?envType=study-plan-v2&envId=top-100-liked
      */ 
     var climbStairs = function(n) {
-      let cur = 1;
-      let pre = 1;
+      // let cur = 1;
+      // let pre = 1;
 
-      for (let i = 2; i <= n; i++) {
-        let tmp = cur;
-        cur = pre + cur;
-        pre = tmp;
+      // for (let i = 2; i <= n; i++) {
+      //   let tmp = cur;
+      //   cur = pre + cur;
+      //   pre = tmp;
+      // }
+
+      // return cur;
+
+      let dp = new Array(n+1);
+      dp[0] = 1;
+      dp[1] = 1;
+
+      for (let i = 2; i < dp.length; i++) {
+        dp[i] = dp[i-2] + dp[i-1];
       }
 
-      return cur;
+      return dp[n];
     }
   </script>
 </body>
