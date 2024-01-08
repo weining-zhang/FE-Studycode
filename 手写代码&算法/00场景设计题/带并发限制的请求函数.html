@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * // 设计一个函数，可以限制请求的并发，同时请求结束之后，调用callback函数
+        sendRequest(requestList, limits, callback)
+
+        sendRequest(
+          [()=>request('A', 1),
+          ()=>request('B', 2),
+          ()=>request('C', 1),
+          ()=>request('D', 2)],
+          3, //并发数
+          (res)=>{
+             console.log(res)
+          }
+        )
+
+        // 其中request 可以是： 
+        function request (url,time = 1){
+           return new Promise((resolve,reject)=>{
+             setTimeout(()=>{
+               console.log('请求结束：'+url);
+                 if(Math.random() > 0.5){
+                     resolve('成功: ' + url)
+                 }else{
+                     reject('错误: ' + url)
+                 }
+             },time*1000)
+           })
+        }
+     */ 
+
+    function sendRequest(requestList, limits, cb) {
+      let queue = requestList.map((task, idx) => ({
+        task,
+        idx,
+      }));
+      let results = [];
+      let runningCount = 0;
+
+      run();
+
+      function run() {
+        while (runningCount < limits && queue.length > 0) {
+          let { task, idx } = queue.shift();
+
+          runningCount++;
+
+          task()
+            .then((res) => {
+              results[idx] = res;
+            })
+            .catch((err) => {
+              results[idx] = err;
+            })
+            .finally(() => {
+              runningCount--;
+
+              if (results.length === requestList.length) {
+                cb(results);
+              }
+
+              run();
+            })
+        }
+      }
+    }
+
+  </script>
+</body>
+</html>
