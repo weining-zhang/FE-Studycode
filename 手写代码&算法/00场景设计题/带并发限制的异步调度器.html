@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  // JS实现一个带并发限制的异步调度器Scheduler
+        // 例如：保证同时运行的任务最多有两个
+        // 完善代码中Scheduler类
+        // 使得以下程序能正确输出
+        const timeout = (time) => new Promise(resolve => {
+            setTimeout(resolve, time)
+        })
+
+        const scheduler = new Scheduler(2);
+
+        const addTask = (time, order) => {
+            scheduler.add(() => timeout(time)).then(() => console.log(order));
+        }
+
+        addTask(1000, '1')
+        addTask(500, '2')
+        addTask(300, '3')
+        addTask(400, '4')
+
+        // output: 2 3 1 4
+        // 一开始，1、2两个任务进入队列
+        // 500ms时，2完成，输出2，任务3进队
+        // 800ms时，3完成，输出3，任务4进队
+        // 1000ms时，1完成，输出1
+        // 1200ms时，4完成，输出4
+     * 
+     *
+     * 易错点：1、class 里访问数据最好不要通过解构，直接用 this. 访问，避免修改时报错（通过解构可以访问到值，但是修改时还是要用 this.
+     * 2、执行时 runningCount 要先加一，执行完之后再减一
+     * 
+     * QA：1、add 方法为什么要返回 promise？答：因为在 addTask 方法中 add 方法后面用了 .then 调用。
+     * 2、timeout 方法为什么要返回 promise？答：因为 timeout 方法相当于一个异步任务，在run方法里才能异步执行。
+     * 3、timeout 方法中 resolve 的作用是什么？答：setTimeout 定时器完成后就会执行传入的回调函数，传入了resolve，那么完成时就会执行resolve。
+     */ 
+
+    class Scheduler {
+      constructor(limit) {
+        this.limit = limit;
+        this.queue = [];
+        this.runningCount = 0;
+      }
+
+      add (task) {
+        return new Promise((resolve) => {
+          this.queue.push({
+            task,
+            resolve,
+          });
+
+          this.run();
+        })
+      }
+
+      run () {
+        if (this.runningCount < this.limit && this.queue.length > 0 ) {
+          const { task, resolve } = this.queue.shift();
+
+          this.runningCount++;
+
+          task().finally(() => {
+            this.runningCount--;
+            resolve();
+
+            this.run();
+          });
+        }
+      }
+    }
+
+    const timeout = (time) => new Promise(resolve => {
+      setTimeout(resolve, time);
+    });
+
+    const scheduler = new Scheduler(2);
+
+    const addTask = (time, order) => {
+      scheduler.add(() => timeout(time)).then(() => console.log(order));
+    };
+
+    addTask(2000, '1');
+    addTask(1000, '2');
+    addTask(600, '3');
+    addTask(800, '4');
+    // output: 2 3 1 4
+
+  </script>
+</body>
+</html>
