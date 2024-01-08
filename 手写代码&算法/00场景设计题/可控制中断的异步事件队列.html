@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  题目链接：https://juejin.cn/post/7249943229289103418#heading-2
+     *  设计一个类 AsyncQueue，其具备两个方法，tap 和 exec，tap 可以绑定回调(可以绑定多个)，exec 执行回调。回调是一个函数，该函数接受一个入参 cb，如果在该函数中不主动调用 cb，则后续的回调不会执行。
+     *  function fn1(cb) {
+          console.log('fn1');
+          cb();
+        }
+
+        function fn2(cb) {
+          console.log('fn2');
+          cb();
+        }
+
+        function fn3(cb) {
+          setTimeout(() => {
+            console.log('fn3');
+            cb();
+          }, 2000);
+        }
+
+        function fn4(cb) {
+          setTimeout(() => {
+            console.log('fn4');
+            cb();
+          }, 3000);
+        }
+
+        // 创建事件队列
+        const asyncQueue = new AsyncQueue();
+        
+        // 注册事件队列
+        asyncQueue.tap('init', fn1);
+        asyncQueue.tap('init', fn2);
+        asyncQueue.tap('init', fn3);
+        asyncQueue.tap('init', fn4);
+
+        // 执行事件队列
+        asyncQueue.exec('init', () => {
+          console.log('执行结束');
+        });
+
+        // 预期输出
+        // fn1
+        // fn2
+        // 2s 后
+        // fn3
+        // 再 3s 后
+        // fn4
+        // 执行结束
+     * 
+     * 
+     *  易错点：1、class 里的数据要用 this 访问
+     *  2、初始化 events 时，fn 放进数组而不是创建一个空数组
+     * 
+     *  QA：1、执行到最后一个task时，idx+1 不会溢出吗？答：有前置判断了 idx < tasks.length，最后一个直接执行 finalCallback 了。
+     */ 
+
+    class AsyncQueue {
+      constructor() {
+        this.events = {};
+      }
+
+      // 事件注册
+      tap(name, fn) {
+        if (this.events[name]) {
+          this.events[name].push(fn);
+        } else {
+          this.events[name] = [fn];
+        }
+      }
+
+      // 事件触发
+      exec(name, finalCallback) {
+        let tasks = this.events[name] || [];
+
+        const runTask = (idx) => {
+          if (idx < tasks.length) {
+            let task = tasks[idx];
+            task(() => runTask(idx + 1));
+          } else {
+            finalCallback();
+          }
+        }
+
+        runTask(0);
+      }
+    }
+
+  </script>
+</body>
+</html>
