@@ -38,7 +38,7 @@
      * 易错点：1、class 里访问数据最好不要通过解构，直接用 this. 访问，避免修改时报错（通过解构可以访问到值，但是修改时还是要用 this.
      * 2、执行时 runningCount 要先加一，执行完之后再减一
      * 
-     * QA：1、add 方法为什么要返回 promise？答：因为在 addTask 方法中 add 方法后面用了 .then 调用。
+     * QA：1、add 方法为什么要返回 promise？答：因为在 addTask 方法中 add 方法后面用了 .then 调用。没用的话可以不返回 promise
      * 2、timeout 方法为什么要返回 promise？答：因为 timeout 方法相当于一个异步任务，在run方法里才能异步执行。
      * 3、timeout 方法中 resolve 的作用是什么？答：setTimeout 定时器完成后就会执行传入的回调函数，传入了resolve，那么完成时就会执行resolve。
      */ 
