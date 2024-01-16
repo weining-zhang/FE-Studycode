@@ -16,49 +16,49 @@
      */ 
 
     var lengthOfLongestSubstring = function(s) {
-      if (!s.length) return 0;
+      // if (!s.length) return 0;
 
-      let map = new Map();
-      let max = 0;
-      let left = 0;
+      // let map = new Map();
+      // let max = 0;
+      // let left = 0;
 
-      for (let i = 0; i < s.length; i++) {
-        if (map.has(s[i])) {
-          left = Math.max(left, map.get(s[i]) + 1);
-        }
+      // for (let i = 0; i < s.length; i++) {
+      //   if (map.has(s[i])) {
+      //     left = Math.max(left, map.get(s[i]) + 1);
+      //   }
 
-        map.set(s[i], i);
-        max = Math.max(max, i - left + 1);
-      }
+      //   map.set(s[i], i);
+      //   max = Math.max(max, i - left + 1);
+      // }
 
-      return max;
+      // return max;
 
       /**
        * 滑动窗口框架解法
        */ 
-      // let map = new Map();
+      let map = new Map();
 
-      // let left = 0;
-      // let right = 0;
-      // let max = 0;
+      let left = 0;
+      let right = 0;
+      let max = 0;
 
-      // while (right < s.length) {
-      //   let rightCr = s[right];
-      //   right++;
+      while (right < s.length) {
+        let rightCr = s[right];
+        right++;
 
-      //   map.set(rightCr, map.get(rightCr) ? map.get(rightCr) + 1 : 1);
+        map.set(rightCr, map.get(rightCr) ? map.get(rightCr) + 1 : 1);
 
-      //   while (map.get(rightCr) > 1) {
-      //     let leftCr = s[left];
-      //     left++;
+        while (map.get(rightCr) > 1) {
+          let leftCr = s[left];
+          left++;
 
-      //     map.set(leftCr, map.get(leftCr) ? map.get(leftCr) - 1 : 1);
-      //   }
+          map.set(leftCr, map.get(leftCr) ? map.get(leftCr) - 1 : 1);
+        }
 
-      //   max = Math.max(max, right - left);
-      // }
+        max = Math.max(max, right - left);
+      }
 
-      // return max;
+      return max;
     };
   </script>
 </body>
