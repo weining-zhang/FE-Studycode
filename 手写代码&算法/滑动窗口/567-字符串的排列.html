@@ -34,10 +34,10 @@
         }
 
         while (right - left >= s1.length) {
+          if (valid === need.size) return true;
+
           let leftCr = s2[left];
           left++;
-
-          if (valid === need.size) return true;
 
           if (need.get(leftCr)) {
             if (window.get(leftCr) === need.get(leftCr)) {
