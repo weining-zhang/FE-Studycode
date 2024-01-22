@@ -24,27 +24,32 @@
       // return res;
 
       // 递归解法：
-      let res = [];
-      let stack = [];
+      let res = [];  // 用于存储遍历结果的数组
+      let stack = []; // 用于模拟栈的数组
 
+      // 如果树不为空，将根节点入栈
       if (root) stack.push(root);
 
+      // 循环执行，直到栈为空
       while (stack.length) {
-        let node = stack.pop();
+        let node = stack.pop(); // 出栈一个节点
 
         if (!node) {
+          // 如果出栈的节点为空，表示其子树已经遍历完毕，此时将其父节点的值加入结果数组
           res.push(stack.pop().val);
           continue;
         }
 
+        // 将当前节点入栈，表示接下来要访问它的子节点
         stack.push(node);
-        stack.push(null);
+        stack.push(null); // 入栈一个空节点，用于标记子树遍历完毕的情况
 
+        // 先将右子节点入栈，再将左子节点入栈，保证左子树先于右子树被访问
         if (node.right) stack.push(node.right);
         if (node.left) stack.push(node.left);
       }
 
-      return res;
+      return res; // 返回最终的遍历结果数组
     }
   </script>
 </body>
