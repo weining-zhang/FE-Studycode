@@ -17,18 +17,34 @@
        * 
        */
 
-      let map = new Map();
+      /** 使用 Object 版本 */
+      let obj = {};
 
       for (let s of strs) {
-        let arr = Array.from(s);
-        arr.sort();
-        let key = arr.toString();
-        let list = map.get(key) ? map.get(key) : [];
+        let key = s.split('').sort().join();
+        let list = obj[key] ? obj[key] : [];
+
         list.push(s);
-        map.set(key, list);
+
+        obj[key] = list;
       }
 
-      return Array.from(map.values());
+      return Object.values(obj);
+
+
+      /** 使用 Map 版本 */
+      // let map = new Map();
+
+      // for (let s of strs) {
+      //   let arr = Array.from(s);
+      //   arr.sort();
+      //   let key = arr.toString();
+      //   let list = map.get(key) ? map.get(key) : [];
+      //   list.push(s);
+      //   map.set(key, list);
+      // }
+
+      // return Array.from(map.values());
     }
   </script>
 </body>
