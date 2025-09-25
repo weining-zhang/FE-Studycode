@@ -9,21 +9,38 @@
   <script>
     /**
      * https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+     * 
      * 思路：map记录每个数字出现的次数，遍历过程中维护一个出现次数最多的数字
      */ 
     var majorityElement = function(nums) {
-      let map = new Map();
+      /** 使用 Object 实现 */
+      let obj = {};
       let max = nums[0];
 
       for (let num of nums) {
-        map.set(num, map.get(num) ? map.get(num) + 1 : 1);
+        obj[num] = obj[num] ? obj[num] + 1 : 1;
 
-        if (map.get(num) > map.get(max)) {
+        if (obj[num] > obj[max]) {
           max = num;
         }
       }
 
       return max;
+
+
+      /** 使用 Map 实现 */
+      // let map = new Map();
+      // let max = nums[0];
+
+      // for (let num of nums) {
+      //   map.set(num, map.get(num) ? map.get(num) + 1 : 1);
+
+      //   if (map.get(num) > map.get(max)) {
+      //     max = num;
+      //   }
+      // }
+
+      // return max;
     }
   </script>
 </body>
