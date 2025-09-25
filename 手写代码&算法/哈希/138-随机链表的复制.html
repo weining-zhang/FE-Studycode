@@ -9,6 +9,22 @@
   <script>
     /**
      * https://leetcode.cn/problems/copy-list-with-random-pointer/solutions/2361362/138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-b-6jeo/?envType=study-plan-v2&envId=top-100-liked
+     * 
+        题目回顾：
+        每个节点有两个指针：
+          - next：指向下一个节点
+          - random：指向链表中任意一个节点（可能是 null）
+        要求：复制出一个一模一样的新链表（深拷贝，不能改原链表）。
+
+
+        哈希解法：
+        1. 我们需要把“原节点”映射到“新节点”，因为：
+          - 新节点的 next / random 都要依赖原节点的关系来确定。
+          - 所以可以建一个 哈希表 map：oldNode → newNode。
+
+        2. 两遍遍历：
+          - 第一遍：把所有节点复制出来，只处理值 val，存进哈希表。
+          - 第二遍：利用哈希表，把新节点的 next 和 random 补全。
      */ 
 
     function Node(val, next, random) {
