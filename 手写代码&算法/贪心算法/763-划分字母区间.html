@@ -10,6 +10,13 @@
     /**
      * 1、https://leetcode.cn/problems/partition-labels/solutions/455814/shou-hua-tu-jie-hua-fen-zi-mu-qu-jian-ji-lu-zui-yu/?envType=study-plan-v2&envId=top-100-liked
      * 2、题目高赞评论 2019.02.20
+     * 
+     *  题意解释：
+     *   给定一个字符串 s，你需要把它分成若干个连续的片段，要求：
+     *   - 每个字母 最多出现在一个片段里（不能跨片段）。
+     *   - 最后输出每个片段的长度。
+     * 
+     *  👉 也就是说：每个字母的 第一次出现和最后一次出现之间的区间，必须完整地包含在同一个片段里。
      */
     var partitionLabels = function(s) {
       let map = {};
