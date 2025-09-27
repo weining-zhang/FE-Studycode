@@ -13,49 +13,42 @@
      * 
      * 滑动窗口框架：
      * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
-     */ 
+     * 
+     * 滑动窗口是一种 双指针区间动态扩张/收缩 的思路，通常解决：
+     *  - 子数组 / 子串问题
+     *  - 最长 / 最短区间”问题
+     *  - 满足某些约束的窗口问题
+     * 
+     * 基本套路：
+     *  1. 用两个指针 left 和 right 表示窗口 [left, right)
+     *  2. 移动 right 扩大窗口（移动完更新窗口数据），直到窗口不满足条件；之后检查合法性，是否需要收缩左窗口
+     *  3. 移动 left 收缩窗口（移动完更新窗口数据），直到窗口再次满足条件
+     *  4. 更新结果
+     */
 
     var lengthOfLongestSubstring = function(s) {
-      // if (!s.length) return 0;
-
-      // let map = new Map();
-      // let max = 0;
-      // let left = 0;
-
-      // for (let i = 0; i < s.length; i++) {
-      //   if (map.has(s[i])) {
-      //     left = Math.max(left, map.get(s[i]) + 1);
-      //   }
-
-      //   map.set(s[i], i);
-      //   max = Math.max(max, i - left + 1);
-      // }
-
-      // return max;
-
       /**
        * 滑动窗口框架解法
        */ 
-      let map = new Map();
-
-      let left = 0;
-      let right = 0;
+      let l = 0;
+      let r = 0;
       let max = 0;
+      let obj = {};
 
-      while (right < s.length) {
-        let rightCr = s[right];
-        right++;
+      while (r < s.length) {
+        let rightCr = s[r];
+        r++;
 
-        map.set(rightCr, map.get(rightCr) ? map.get(rightCr) + 1 : 1);
+        obj[rightCr] = obj[rightCr] ? obj[rightCr] + 1 : 1;
 
-        while (map.get(rightCr) > 1) {
-          let leftCr = s[left];
-          left++;
+        while (obj[rightCr] > 1) {
+          let leftCr = s[l];
+          l++;
 
-          map.set(leftCr, map.get(leftCr) ? map.get(leftCr) - 1 : 1);
+          obj[leftCr] = obj[leftCr] ? obj[leftCr] - 1 : 1;
         }
 
-        max = Math.max(max, right - left);
+        max = Math.max(max, r - l);
       }
 
       return max;
