@@ -21,7 +21,7 @@
       let area = 0;
       let max = 0;
 
-      while (j - i >= 1) {
+      while (i < j) {
         if (height[i] < height[j]) {
           area = height[i] * (j - i);
           i++;
