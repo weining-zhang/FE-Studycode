@@ -10,6 +10,26 @@
     /**
      * 1、https://leetcode.cn/problems/climbing-stairs/solutions/9983/hua-jie-suan-fa-70-pa-lou-ti-by-guanpengchn/?envType=study-plan-v2&envId=top-100-liked
      * 2、https://leetcode.cn/problems/climbing-stairs/solutions/270926/cong-zhi-jue-si-wei-fen-xi-dong-tai-gui-hua-si-lu-/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * DP 思路拆解：
+     * 1. 定义状态
+     *  设 dp[i] 表示 到达第 i 阶楼梯的方法数。
+
+     * 2. 找到转移方程
+     * - 走到第 i 阶，要么是从 i-1 阶跨 1 步上来；
+     * - 要么是从 i-2 阶跨 2 步上来。
+     *  所以：
+     *  dp[i] = dp[i-1] + dp[i-2]
+     * 
+     *  这其实就是「斐波那契数列」。
+     * 
+     * 3. 初始条件
+     *  - dp[0] = 1（在地面不动，也算一种方式）
+     *  - dp[1] = 1（只有一步上去）
+     * 
+     * 4. 答案
+     *  dp[n] 就是结果。
+     * 
      */ 
     var climbStairs = function(n) {
       // let cur = 1;
@@ -27,7 +47,7 @@
       dp[0] = 1;
       dp[1] = 1;
 
-      for (let i = 2; i < n + 1; i++) {
+      for (let i = 2; i <= n; i++) { // 循环必须要跑到 i = n，这样才能计算出 dp[n]
         dp[i] = dp[i-2] + dp[i-1];
       }
 
