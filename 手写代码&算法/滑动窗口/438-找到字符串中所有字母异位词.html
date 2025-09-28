@@ -9,52 +9,63 @@
   <script>
     /**
      * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 题意怎么理解？
+     *  - 字母异位词：即「字母相同，但顺序不同」的字符串。
+     *    - 比如 p = "abc"，那么它的异位词包括 "abc", "acb", "bac", "bca", "cab", "cba"。
+     *  - 目标：在 s 中找到所有长度等于 p.length 的子串，如果这个子串是 p 的一个异位词，就把它的起始下标存起来。
+     * 
+     * 举例：
+     *  s = "cbaebabacd", p = "abc"
+     *  - s[0..2] = "cba" → 是 "abc" 的异位词 → 起始下标 0
+     *  - s[6..8] = "bac" → 也是 "abc" 的异位词 → 起始下标 6
+     *  👉 所以答案是 [0, 6]
      */
 
     let s = "cbaebabacd";
     let p = "abc";
 
     var findAnagrams = function(s, p) {
-      let need = new Map();
-      let window = new Map();
-
-      for (let s of p) {
-        need.set(s, need.get(s) ? need.get(s) + 1 : 1);
+      let need = {};
+      let window = {};
+      for (let c of p) {
+        need[c] = need[c] ? need[c] + 1 : 1;
       }
 
-      let left = 0;
-      let right = 0;
-      let valid = 0;
+      let l = 0;
+      let r = 0;
       let res = [];
+      let valid = 0; // 有多少个字母频次满足了 need
 
-      while (right < s.length) {
-        let rightChar = s[right];
-        right++;
+      while (r < s.length) {
+        let rightCr = s[r];
+        r++;
 
-        if (need.get(rightChar)) {
-          window.set(rightChar, window.get(rightChar) ? window.get(rightChar) + 1 : 1);
-          if (window.get(rightChar) === need.get(rightChar)) {
+        if (need[rightCr]) {
+          window[rightCr] = window[rightCr] ? window[rightCr] + 1 : 1;
+          if (window[rightCr] === need[rightCr]) {
             valid++;
           }
         }
 
-        while (right - left >= p.length) {
-          if (valid === need.size) {
-            res.push(left);
+        while (r - l >= p.length) {
+          if (valid === Object.keys(need).length) {
+            res.push(l); // 要返回的是子串的起始下标（左下标）
           }
 
-          let leftChar = s[left];
-          left++;
+          let leftCr = s[l];
+          l++;
 
-          if (need.get(leftChar)) {
-            if (window.get(leftChar) === need.get(leftChar)) {
+          if (need[leftCr]) {
+            if (window[leftCr] === need[leftCr]) {
               valid--;
             }
-            window.set(leftChar, window.get(leftChar) ? window.get(leftChar) - 1 : 1);
+            window[leftCr] = window[leftCr] ? window[leftCr] - 1 : 1;
           }
         }
-      }
 
+      }
+      
       return res;
     };
 
