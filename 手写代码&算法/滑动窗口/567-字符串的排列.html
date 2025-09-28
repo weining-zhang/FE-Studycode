@@ -8,42 +8,46 @@
 <body>
   <script>
     /**
+     * 题目：https://leetcode.cn/problems/permutation-in-string/description/
      * https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 解法同 438-找到字符串中所有字母异位词，只需要调整结果处理（返回true or false）
      */ 
 
     var checkInclusion = function(s1, s2) {
-      let need = new Map();
-      let window = new Map();
-      for (let s of s1) {
-        need.set(s, need.get(s) ? need.get(s) + 1 : 1);
+      let need = {};
+      let window = {};
+
+      for (let c of s1) {
+        need[c] = need[c] ? need[c] + 1 : 1;
       }
 
-      let left = 0;
-      let right = 0;
+      let l = 0;
+      let r = 0;
       let valid = 0;
 
-      while (right < s2.length) {
-        let rightCr = s2[right];
-        right++;
+      while (r < s2.length) {
+        let rightCr = s2[r];
+        r++;
 
-        if (need.get(rightCr)) {
-          window.set(rightCr, window.get(rightCr) ? window.get(rightCr) + 1 : 1);
-          if (window.get(rightCr) === need.get(rightCr)) {
+        if (need[rightCr]) {
+          window[rightCr] = window[rightCr] ? window[rightCr] + 1 : 1;
+          if (window[rightCr] === need[rightCr]) {
             valid++;
           }
         }
 
-        while (right - left >= s1.length) {
-          if (valid === need.size) return true;
+        while (r - l >= s1.length) {
+          if (valid === Object.keys(need).length) return true;
 
-          let leftCr = s2[left];
-          left++;
+          let leftCr = s2[l];
+          l++;
 
-          if (need.get(leftCr)) {
-            if (window.get(leftCr) === need.get(leftCr)) {
+          if (need[leftCr]) {
+            if (window[leftCr] === need[leftCr]) {
               valid--;
             }
-            window.set(leftCr, window.get(leftCr) ? window.get(leftCr) - 1 : 1);
+            window[leftCr] = window[leftCr] ? window[leftCr] - 1 : 1;
           }
         }
       }
