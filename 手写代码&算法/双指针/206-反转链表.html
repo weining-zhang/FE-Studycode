@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/reverse-linked-list/solutions/36710/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 核心思想：双指针 + 局部反转，三步走：暂存 → 反转 → 前移
+     * 
+     * 我们使用两个指针变量：
+     *   - pre（前一个节点）
+     *   - cur（当前节点）
+
+     * 在遍历过程中：
+     *   - cur.next 指针要指向 pre（反转指向方向）
+     *   - 然后把两个指针都往前移动一步
+     */ 
+    var reverseList = function(head) {
+      let pre = null; // 反转后链表的头结点最终会是 pre
+      let cur = head;
+
+      while (cur !== null) {
+        let tmp = cur.next; // 保留 cur 的下一个节点，即原链表的下一个节点
+        cur.next = pre; // cur 指向 pre，让当前节点指向前一个节点，完成“反转”动作的一小步
+
+        pre = cur; // pre 向前移一步
+        cur = tmp; // cur 向前移一步
+      }
+
+      return pre;
+    }
+  </script>
+</body>
+</html>
