@@ -9,6 +9,14 @@
   <script>
     /**
      * https://leetcode.cn/problems/palindrome-linked-list/solutions/457312/di-gui-zhan-deng-3chong-jie-jue-fang-shi-zui-hao-d/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 思路概要:
+     * 1. 正常单链表只能从前往后走；
+     * 2. 如果能从“后往前”走，就可以和前半段比较；
+     * 3. 递归的回溯阶段正好是“从后往前”的过程；
+     * 4. 所以用递归实现一个「双指针」：
+     *  - tmp 从前往后走；
+     *  - head 通过递归从后往前比较。
      */ 
 
     var isPalindrome = function(head) {
