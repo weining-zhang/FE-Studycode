@@ -13,17 +13,31 @@
      * 
      * 递归要点：
      * 1、节点为空 或者 只有一个节点（无法再比较） 时结束递归
+     * 
+     * 🧱 思路讲解
+
+        1. 每次处理 两个节点，假设当前这两个节点是：
+        one → two → three
+
+        2. 我们要把它们变成：
+        two → one → （接着递归处理three之后的链表）
+
+        3. 然后递归地对子链表继续做“两两交换”。
      */ 
     var swapPairs = function(head) {
+      // 递归终止条件
       if (head === null || head.next === null) return head;
 
-      let one = head;
-      let two = one.next;
-      let three = two.next;
+      // 定义三个节点
+      let one = head;         // 第一个节点
+      let two = one.next;     // 第二个节点
+      let three = two.next;   // 第三个节点（下一对的开始）
 
-      two.next = one;
-      one.next = swapPairs(three);
+      // 交换操作
+      two.next = one;                // 第二个节点指向第一个，实现反转
+      one.next = swapPairs(three);   // 第一个节点指向递归后的结果（即下一对处理好的头节点）
 
+      // 返回新的头节点（two）
       return two;
     }
   </script>
