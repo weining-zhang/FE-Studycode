@@ -10,6 +10,21 @@
     /* 
       https://leetcode.cn/problems/add-two-numbers/solutions/7348/hua-jie-suan-fa-2-liang-shu-xiang-jia-by-guanpengc/?envType=study-plan-v2&envId=top-100-liked
       高赞评论，2021.12.17
+
+      🧠 思路讲解
+
+      思路其实就是：
+        - 模拟「小学加法」的逐位相加过程，并处理进位。
+
+      每一位相加时：
+        1. 从 l1、l2 分别取出当前位（没有就当 0）。
+        2. 加上上一步的 carry（进位）。
+        3. 当前位的结果是 (sum % 10)。
+        4. 下一位进位是 (Math.floor(sum / 10))。
+        5. 移动链表指针到下一位。
+        6. 循环结束后，如果还有进位（carry=1），要新建节点补上。
+
+      循环结束后，如果还有进位（carry=1），要新建节点补上。
     */
     function ListNode(val) {
       this.val = val;
@@ -17,28 +32,30 @@
     }
 
     function addTwoNumbers(l1, l2) {
-      let pre = new ListNode(0);
-      let cur = pre;
-      let carry = 0;
+      let pre = new ListNode(0); // 哑节点
+      let cur = pre;             // 当前操作节点
+      let carry = 0;             // 初始进位为0
 
+      // 当任意一个链表未遍历完，就继续
       while (l1 !== null || l2 !== null) {
-        let x1 = l1 ? l1.val : 0;
-        let x2 = l2 ? l2.val : 0;
-        let sum = x1 + x2 + carry;
+        let x1 = l1 ? l1.val : 0;     // 取l1当前值或0
+        let x2 = l2 ? l2.val : 0;     // 取l2当前值或0
+        let sum = x1 + x2 + carry;    // 当前位总和
 
-        carry = Math.floor(sum / 10);
-        cur.next = new ListNode(sum % 10);
-        cur = cur.next;
+        carry = Math.floor(sum / 10); // 更新进位
+        cur.next = new ListNode(sum % 10); // 当前位的结果节点
+        cur = cur.next;                     // 移动指针
 
-        if (l1 !== null) l1 = l1.next;
-        if (l2 !== null) l2 = l2.next;
+        if (l1 !== null) l1 = l1.next; // l1前进
+        if (l2 !== null) l2 = l2.next; // l2前进
       }
 
-      if (carry === 1) {
+      // 最后如果还有进位，要加上
+      if (carry) {
         cur.next = new ListNode(carry);
       }
 
-      return pre.next;
+      return pre.next; // 返回结果链表（跳过哑节点）
     }
   </script>
 </body>
