@@ -9,30 +9,47 @@
   <script>
     /**
      * https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solutions/7083/dong-hua-tu-jie-leetcode-di-19-hao-wen-ti-shan-chu/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 🧠 解题核心思想
+
+        这题有几种解法，但最优雅的是：
+        - ✅ 用 “双指针” —— 让 fast 指针比 slow 领先 n 个节点。
+
+        这样，当 fast 指向链表末尾时，slow 就正好在 倒数第 n 个节点的前一个节点，
+        然后我们只要执行 slow.next = slow.next.next 就能删除目标节点。
+
+
+      💡 为什么要用哑节点（dummy node）？
+
+        👉 关键原因：
+        当删除的节点是头节点时（比如 n = 链表长度），
+        我们需要让 slow 停在“头节点的前一个位置”，
+        而这个“前一个”如果没有 dummy，就不好处理。
      */ 
 
-    function ListNode(val) {
-      this.val = val;
-      this.next = null;
-    }
-
     function removeNthFromEnd(head, n) {
-      let pre = new ListNode(0);
-      pre.next = head;
+      let pre = new ListNode(0); // 创建哑节点
+      pre.next = head; // 哑节点指向原链表头
 
       let fast = pre;
       let slow = pre;
+
+      // 1️⃣ 让 fast 指针先走 n+1 步
       for (let i = 0; i < n + 1; i++) {
         fast = fast.next;
       }
 
+      // 2️⃣ 让 fast、slow 同时向前走
+      // 当 fast 到达链表末尾时，slow 正好在倒数第 n+1 个节点
       while (fast !== null) {
         fast = fast.next;
         slow = slow.next;
       }
 
+      // 3️⃣ 删除 slow.next（即倒数第 n 个节点）
       slow.next = slow.next.next;
 
+      // 4️⃣ 返回新链表头
       return pre.next;
     }
   </script>
