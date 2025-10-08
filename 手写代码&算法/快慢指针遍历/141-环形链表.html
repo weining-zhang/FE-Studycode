@@ -13,7 +13,7 @@
       常见链表问题解法：
       https://leetcode.cn/problems/linked-list-cycle/solutions/175734/yi-wen-gao-ding-chang-jian-de-lian-biao-wen-ti-h-2/?envType=study-plan-v2&envId=top-100-liked
 
-      思路讲解 — 快慢指针法（Floyd 判圈法）
+      🧠 思路讲解 — 快慢指针法（Floyd 判圈法）
 
       用两个指针：
         - slow：每次走一步；
@@ -22,6 +22,12 @@
       核心思想：
         - 如果链表中有环，那么 fast 和 slow 一定会在环中相遇；
         - 如果没有环，fast 会最先到达 null。
+
+      💡 为什么这个算法有效？
+
+      假设环的长度为 r，入口前的长度为 L，当快慢指针进入环后：
+        - fast 每次比 slow 多走 1 步；
+        - 所以他们最终会在环中相遇（类似于操场上跑圈问题——跑得快的会套圈）。
      */
     function hasCycle(head) {
       let fast = head;
