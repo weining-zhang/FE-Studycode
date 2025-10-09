@@ -9,6 +9,15 @@
   <script>
     /**
      * https://leetcode.cn/problems/maximum-depth-of-binary-tree/solutions/10740/hua-jie-suan-fa-104-er-cha-shu-de-zui-da-shen-du-b/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 🌳 二、递归思想（核心）
+     * 
+     * 🔹核心思路：
+     *    - 一棵树的最大深度 = 左子树最大深度 和 右子树最大深度 的较大者 + 1
+     * 
+     *   也就是说：
+     *    - 当前节点的“深度”取决于它的左右子树谁更深；
+     *    - 然后在此基础上再 +1（因为要算上当前节点这一层）。
      */ 
     var maxDepth = function(root) {
       if (!root) return 0;
