@@ -9,6 +9,15 @@
   <script>
     /**
      * https://leetcode.cn/problems/invert-binary-tree/solutions/2361621/226-fan-zhuan-er-cha-shu-fen-zhi-qing-xi-tqlf/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 🧠 递归思路拆解
+        🔹核心思想：
+          - 翻转一棵树 = 翻转它的左右子树 + 交换左右子树。
+
+        也就是：
+          1. 先递归翻转左右子树；
+          2. 再把左右子树交换；
+          3. 最后返回当前节点。
      */ 
     var invertTree = function(root) {
       if (!root) return null;
