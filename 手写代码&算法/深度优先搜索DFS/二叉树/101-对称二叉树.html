@@ -10,17 +10,41 @@
     /**
      * https://leetcode.cn/problems/symmetric-tree/solutions/6694/hua-jie-suan-fa-101-dui-cheng-er-cha-shu-by-guanpe/?envType=study-plan-v2&envId=top-100-liked
      * 关联题目：100-相同的树
+     * 
+     * 🧠 思路分析
+
+        要判断一棵树是不是对称树，等价于判断：
+          - 这棵树的左子树和右子树是否互为镜像（mirror）。
+
+        所以我们可以定义一个辅助函数 isMirror(t1, t2)，判断两棵树是否镜像对称。
+
+        镜像对称的定义是：
+        1. 两个节点都为空：✅ 对称
+        2. 只有一个为空：❌ 不对称
+        3. 两个节点的值相等，且：
+          - t1.left 与 t2.right 镜像对称
+          - t1.right 与 t2.left 镜像对称
      */ 
-    var isSymmetric = function(root) {
+     var isSymmetric = function(root) {
+      // 直接判断整棵树是否是自身的镜像
       return isMirror(root, root);
 
+      // 辅助函数：判断两棵树是否镜像
       function isMirror(t1, t2) {
+        // 情况1：两个节点都为空
         if (t1 === null && t2 === null) return true;
+
+        // 情况2：只有一个为空（结构不对称）
         if (t1 === null || t2 === null) return false;
 
-        return t1.val === t2.val && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left);
+        // 情况3：当前节点值相同 && 左右子树镜像对称
+        return (
+          t1.val === t2.val &&
+          isMirror(t1.left, t2.right) &&
+          isMirror(t1.right, t2.left)
+        );
       }
-    }
+    };
   </script>
 </body>
 </html>
