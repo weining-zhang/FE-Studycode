@@ -10,22 +10,40 @@
     /* 
       思路：https://leetcode-cn.com/problems/diameter-of-binary-tree/solution/javascriptshen-du-you-xian-bian-li-dfs-guan-fang-t/
       https://leetcode.cn/problems/diameter-of-binary-tree/solutions/139683/er-cha-shu-de-zhi-jing-by-leetcode-solution/，高赞评论 2020.03.10
+
+      🧠 思路分析
+
+        核心思路是：
+          - “任意一个节点，它的左子树深度 + 右子树深度”
+          - 就是“以它为根的最长路径”。
+
+        我们要求的“直径”，其实就是：
+          - 全树所有节点的 “左子树深度 + 右子树深度” 的 最大值
+
+      
+      💡 总结一句话
+          - 直径 = 所有节点的 “左子树高度 + 右子树高度” 的最大值。
+          - 递归时既要“向下求深度”，又要“向上更新最大路径”。
      */
     function diameterOfBinaryTree(root) {
-      let max = 0;
+      let max = 0; // 记录最大直径（全局变量）
 
-      depth(root);
-      return max;
+      depth(root); // 启动递归计算深度
+      return max;  // 返回最终结果
 
+      // 递归函数：返回当前节点的高度
       function depth(root) {
-        if (root === null) return 0;
+        if (root === null) return 0; // 空节点高度为 0
 
-        let left = depth(root.left); // 不含 root 的高度
+        // 分别计算左右子树高度
+        let left = depth(root.left);
         let right = depth(root.right);
 
-        max = Math.max(left + right, max);
+        // 更新最大直径（注意是边数，所以 left + right）
+        max = Math.max(max, left + right);
 
-        return Math.max(left, right) + 1; // +1 是加上当前 root 的高度
+        // 返回当前节点的高度（需要 +1 表示当前节点这一层）
+        return Math.max(left, right) + 1;
       }
     }
   </script>
