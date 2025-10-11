@@ -11,10 +11,37 @@
       思路：https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/pythonjs-er-fen-fa-33-sou-suo-xuan-zhuan-pai-xu-sh/
       https://leetcode.cn/problems/search-in-rotated-sorted-array/solutions/5906/ji-jian-solution-by-lukelee/?envType=study-plan-v2&envId=top-100-liked
       高赞评论 2021.03.14、2020.04.29
-     */
-    let nums = [4,5,6,7,0,1,2], target = 0;
-    // let nums = [4,5,6,7,0,1,2], target = 3;
 
+      🧩 一、题目描述
+
+      给定一个 升序排列但被旋转过的数组 nums（可能旋转若干次），
+      以及一个目标值 target，
+      请返回 target 的下标，如果不存在则返回 -1。
+
+      ⚙️ 例如：
+      输入: nums = [4,5,6,7,0,1,2], target = 0
+      输出: 4
+
+
+      🧠 二、核心思路：二分 + 判断哪边有序
+
+      在普通二分中，我们通过比较 nums[mid] 与 target 判断方向。
+      但在“旋转数组”中，一半可能是乱的。
+
+      所以：
+        - 每次取中点后，要判断哪一边是有序的，再决定 target 在哪边。
+
+
+      🧩 三、易错点：
+
+      1. 情况1中为什么需要 target <= nums[right]，而不能只写 target > nums[mid] ？
+
+        判断右半边有序后：
+          - 右边的值是递增的；
+          - 只有当 target 落在 (nums[mid], nums[right]] 内时，才该去右边找；
+          - 否则 target 一定在左边（或根本不存在）。
+
+     */
     function search(nums, target) {
       let left = 0;
       let right = nums.length - 1;
@@ -22,14 +49,22 @@
       while (left <= right) {
         let mid = Math.floor((left + right) / 2);
 
+        // 🎯 直接命中
         if (nums[mid] === target) return mid;
+
+        // ✅ 情况1：右半部分是有序的
         else if (nums[mid] < nums[right]) {
+          // 如果 target 在右边的有序区间内
           if (target > nums[mid] && target <= nums[right]) {
             left = mid + 1;
           } else {
             right = mid - 1;
           }
-        } else {
+        }
+
+        // ✅ 情况2：左半部分是有序的
+        else {
+          // 如果 target 在左边的有序区间内
           if (target >= nums[left] && target < nums[mid]) {
             right = mid - 1;
           } else {
@@ -38,10 +73,9 @@
         }
       }
 
+      // ❌ 没找到
       return -1;
     }
-
-    console.log(search(nums, target));
   </script>
 </body>
 </html>
