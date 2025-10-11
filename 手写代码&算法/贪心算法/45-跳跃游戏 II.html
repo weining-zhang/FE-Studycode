@@ -9,23 +9,52 @@
   <script>
     /**
      * https://leetcode.cn/problems/jump-game-ii/solutions/36035/45-by-ikaruga/?envType=study-plan-v2&envId=top-100-liked
+     * 
+     * 💡 思路核心：贪心算法（Greedy）
+        这一题仍然是贪心思路，但我们不只要知道“能不能到”，还要知道每一步跳多远最划算。
+
+        我们要找到：
+        - 能覆盖的最远范围
+        - 在这个范围内跳几次能扩展到更远
+
+        
+        🧠 贪心核心逻辑
+
+        遍历数组时维护三个变量：
+        - maxReach	当前能跳到的最远位置
+        - end	当前跳跃的边界（这一跳能到的最远点）
+        - step	已经跳了几次
+
+        算法思路：
+        1. 遍历数组（不用遍历最后一个元素）
+        2. 更新当前能跳到的最远距离 maxReach = Math.max(maxReach, i + nums[i])
+        3. 如果走到了当前跳跃的边界 i === end
+          → 说明必须再跳一次了
+          → 更新跳跃次数 step++
+          → 更新新边界为 end = maxReach
+
+        🤔 QA
+        1. 为什么不需要遍历到最后一个位置？
+          - 遍历到倒数第二个位置就够了，因为到最后一个位置时，你已经“跳到了终点”，而不需要“再跳一次”。
      */ 
     var jump = function(nums) {
-      let maxPos = 0;
-      let end = 0;
-      let res = 0;
+      let step = 0;       // 跳跃次数
+      let end = 0;        // 当前这次跳能到的最远边界
+      let maxReach = 0;   // 当前能跳到的最远位置
 
       for (let i = 0; i < nums.length - 1; i++) {
-        maxPos = Math.max(maxPos, nums[i] + i);
+        // 记录能跳到的最远距离
+        maxReach = Math.max(maxReach, i + nums[i]);
 
+        // 如果到达当前边界，必须再跳一步
         if (i === end) {
-          end = maxPos;
-          res++;
+          step++;
+          end = maxReach; // 更新下一次跳的边界
         }
       }
 
-      return res;
-    }
+      return step;
+    };
   </script>
 </body>
 </html>
