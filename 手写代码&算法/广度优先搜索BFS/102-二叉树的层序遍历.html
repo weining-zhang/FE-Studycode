@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+      思路：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/102er-cha-shu-de-ceng-ci-bian-li-javascript-ti-jie/
+      https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/yan-du-you-xian-sou-suo-by-shetia/
+      
+      输入示例：
+          3
+         / \
+        9  20
+          /  \
+         15   7
+      输出示例：
+        [
+          [3],
+          [9,20],
+          [15,7]
+        ]
+
+        💡 题解思路：BFS（广度优先遍历）
+
+          层序遍历 = 一层一层遍历
+          ➡️ 典型的「队列」（Queue）题型。
+
+          核心思路：
+          1. 用队列 queue 来存放当前层的节点。
+
+          2. 每次循环时：
+            - 取出当前队列长度（表示这一层的节点数）
+            - 遍历这一层所有节点，记录它们的值
+            - 把它们的左右子节点（如果存在）加入队列
+            
+          3. 遍历完这一层后，把收集的值放进 res。
+     */
+    function levelOrder(root) {
+      if (root === null) return [];
+
+      const res = [];
+      const queue = [root]; // 初始化队列，放入根节点
+
+      while (queue.length > 0) {
+        const level = []; // 存放当前层的值
+        const size = queue.length; // 记录当前层节点数，即该层需要遍历的次数
+
+        for (let i = 0; i < size; i++) {
+          const node = queue.shift(); // 出队
+          level.push(node.val);       // 收集节点值
+
+          if (node.left) queue.push(node.left);   // 左子节点入队
+          if (node.right) queue.push(node.right); // 右子节点入队
+        }
+
+        res.push(level); // 当前层遍历完，加入结果
+      }
+
+      return res;
+    }
+  </script>
+</body>
+</html>
