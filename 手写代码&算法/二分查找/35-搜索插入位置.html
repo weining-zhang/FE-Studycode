@@ -11,23 +11,39 @@
      * https://leetcode.cn/problems/search-insert-position/solutions/8017/hua-jie-suan-fa-35-sou-suo-cha-ru-wei-zhi-by-guanp/
      * 
      * 在 有序数组 中查找符合条件的某个数（或者它的下标），可以使用二分查找
+     * 
+     * 
+     * 🧠 思路讲解：二分查找变体
+
+        我们要在 有序数组 中找目标值 → 二分查找最合适。
+
+        但与普通二分查找不同的是：
+          - 没找到目标值时，我们仍需返回它应插入的位置。
+
+        所以要在退出循环时返回 left。
      */ 
     var searchInsert = function(nums, target) {
       let left = 0;
       let right = nums.length - 1;
 
       while (left <= right) {
+        // 🧮 计算中点
         let mid = Math.floor((left + right) / 2);
 
+        // 🟢 找到了目标值，直接返回索引
         if (nums[mid] === target) return mid;
 
+        // 🔻 target 比中点小，往左半边搜索
         if (nums[mid] > target) {
           right = mid - 1;
         } else {
+          // 🔺 target 比中点大，往右半边搜索
           left = mid + 1;
         }
       }
 
+      // 退出循环说明没找到
+      // 此时 left 正好是插入 target 的正确位置
       return left;
     }
   </script>
