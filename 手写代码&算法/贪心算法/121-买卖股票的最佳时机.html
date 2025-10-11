@@ -11,23 +11,30 @@
      * https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/121-mai-mai-gu-piao-de-zui-jia-shi-ji-by-alexer-66/
      * 思路：峰谷法
      * min记录最低价格，max记录最高利润
-     */ 
-    let prices = [7,1,5,3,6,4];
+     * 
+     * ✅ 题解思路（贪心思想）
 
+        我们希望：
+          - 在价格最低的时候买入
+          - 在买入之后的某天价格最高时卖出
+
+        所以我们遍历 prices，实时更新：
+          - min：到目前为止遇到的最小价格（买入价）
+          - max：到目前为止能获得的最大利润
+     */ 
     function maxProfit(prices) {
-      let min = Infinity;
-      let max = 0;
+      let min = Infinity; // 初始化为正无穷，表示“还没见过最低价”
+      let max = 0;        // 最大利润初始为0
 
       for (let i = 0; i < prices.length; i++) {
         if (prices[i] < min)
-          min = prices[i]
+          min = prices[i];                 // 遇到更低价格，更新买入点
         else 
-          max = Math.max(max, prices[i] - min)
+          max = Math.max(max, prices[i] - min); // 否则，计算卖出收益
       }
+
       return max;
     }
-
-    console.log(maxProfit(prices));
   </script>
 </body>
 </html>
