@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree
+     * 
+     * ✅ 题解思路：递归构造
+
+        我们用一个辅助函数：
+        - buildBST(leftIndex, rightIndex)
+
+        表示在 nums[leftIndex...rightIndex] 这个区间上构建一棵平衡 BST。
+
+        递归逻辑：
+          1. 如果 left > right，说明区间为空，返回 null
+          2. 取中点 mid = Math.floor((left + right) / 2)
+          3. 创建根节点 nums[mid]
+          4. 递归构建左子树 → buildBST(left, mid - 1)
+          5. 递归构建右子树 → buildBST(mid + 1, right)
+          6. 返回根节点
+          
+     */
+
+    /**
+     * 将有序数组转换为高度平衡的二叉搜索树
+     * @param {number[]} nums - 已升序排序的数组
+     * @return {TreeNode} - 返回平衡二叉搜索树的根节点
+     */
+    var sortedArrayToBST = function(nums) {
+      // 从整个数组区间 [0, nums.length - 1] 开始递归构建
+      return buildBST(0, nums.length - 1);
+
+      /**
+       * 递归构建二叉搜索树
+       * @param {number} left - 当前子区间左边界索引
+       * @param {number} right - 当前子区间右边界索引
+       * @return {TreeNode|null} - 返回当前子树的根节点
+       */
+      function buildBST(left, right) {
+        // 🟢 递归结束条件：如果左边界大于右边界，说明区间为空，没有节点可建
+        if (left > right) return null;
+
+        let mid = Math.floor((left + right) / 2); // 取中间索引作为根节点（保证树尽量平衡）
+        let root = new TreeNode(nums[mid]); // 创建当前根节点
+
+        root.left = buildBST(left, mid - 1); // 递归构建左子树：使用中点左侧的数组部分
+        root.right = buildBST(mid + 1, right); // 递归构建右子树：使用中点右侧的数组部分
+
+        return root; // 返回当前子树的根节点
+      }
+    };
+  </script>
+</body>
+</html>
