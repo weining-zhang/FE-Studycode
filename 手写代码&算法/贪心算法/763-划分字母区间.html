@@ -11,15 +11,39 @@
      * 1、https://leetcode.cn/problems/partition-labels/solutions/455814/shou-hua-tu-jie-hua-fen-zi-mu-qu-jian-ji-lu-zui-yu/?envType=study-plan-v2&envId=top-100-liked
      * 2、题目高赞评论 2019.02.20
      * 
-     *  题意解释：
-     *   给定一个字符串 s，你需要把它分成若干个连续的片段，要求：
-     *   - 每个字母 最多出现在一个片段里（不能跨片段）。
-     *   - 最后输出每个片段的长度。
-     * 
-     *  👉 也就是说：每个字母的 第一次出现和最后一次出现之间的区间，必须完整地包含在同一个片段里。
+     * 🧩 题目描述
+        给定一个字符串 s，把它划分成尽可能多的片段，
+        使得每个字母只出现在其中的一个片段中。
+
+        然后返回每个片段的长度。
+
+
+      🧠 思路讲解（贪心）
+        ① 第一步：记录每个字符的最后出现位置
+
+        ② 第二步：遍历字符串，动态扩展区间
+          - 我们从 start 开始向右扫描；
+          - 每次看到一个字母 s[i]，我们知道它的最后出现位置是 map[s[i]]；
+          - 为了保证这个字母不会被分割到别的区间，我们必须让当前区间至少延伸到 map[s[i]]；
+          - 因此：end = Math.max(end, map[s[i]])
+
+        ③ 当 i === end 时说明：
+          我们已经到达了当前区间中所有字母的最后出现位置，
+          这个区间可以安全地结束。
+
+          于是我们：
+            - 计算区间长度：end - start + 1
+            - 保存结果
+            - 更新 start = i + 1，从下一个位置重新开始新的一段
+
+
+      ✅ 总结一句话
+        1. 先记录每个字母的最远位置，再从左到右扫描，
+        2. 每当扫描到这个最远边界，就完成一个分区。
      */
     var partitionLabels = function(s) {
       let map = {};
+      // 1️⃣ 记录每个字母最后出现的位置
       for (let i = 0; i < s.length; i++) {
         map[s[i]] = i;
       }
@@ -28,12 +52,13 @@
       let start = 0;
       let end = 0;
 
+      // 2️⃣ 遍历字符串，动态更新当前分区边界
       for (let i = 0; i < s.length; i++) {
-        end = Math.max(end, map[s[i]]);
+        end = Math.max(end, map[s[i]]); // 更新当前区间最远边界
 
-        if (i === end) {
+        if (i === end) { // 到达区间末尾，完成一个分区
           res.push(end - start + 1);
-          start = i + 1;
+          start = i + 1; // 开始新分区
         }
       }
 
