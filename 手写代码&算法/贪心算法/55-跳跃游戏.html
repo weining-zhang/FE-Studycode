@@ -10,15 +10,27 @@
     /* 
       思路：https://leetcode-cn.com/problems/jump-game/solution/pythonjs-tan-xin-55-tiao-yue-you-xi-by-fe-lucifer/
       https://leetcode.cn/problems/jump-game/solutions/24322/55-by-ikaruga/
+
+      ✅ 思路核心：贪心法（Greedy）
+
+        遍历数组时，我们只关心一个问题：
+          - 当前能跳到的最远位置 max 到底有多远？
+
+        1. 只要我们遍历的每个位置都在 max 能覆盖的范围内，就说明“前面能到这里”，继续更新能跳的最远距离。
+        2. 一旦发现有个位置 i 连 max 都跳不到，那后面的也不用看了，直接返回 false。
     */
     var canJump = function(nums) {
-      let max = 0;
+      let max = 0;  // 当前能跳到的最远位置
 
       for (let i = 0; i < nums.length; i++) {
+        // 如果当前下标已经超过了最远可达距离 => 前面跳不过来了
         if (max < i) return false;
+
+        // 更新最远可达距离：当前位置 + 能跳的步数
         max = Math.max(max, i + nums[i]);
       }
 
+      // 如果整个数组都能遍历完，说明可以到达最后
       return true;
     };
   </script>
