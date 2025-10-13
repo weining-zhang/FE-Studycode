@@ -45,7 +45,7 @@
       function backtrack() {
         // 终止条件：路径长度等于数组长度
         if (path.length === nums.length) {
-          res.push([...path]); // 拷贝一份结果
+          res.push([...path]); // 拷贝一份结果，避免后续回溯修改 path 时，影响已保存的结果
           return;
         }
 
