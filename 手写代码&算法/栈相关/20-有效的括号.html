@@ -10,25 +10,48 @@
     /* 
       https://leetcode.cn/problems/valid-parentheses/solutions/9185/valid-parentheses-fu-zhu-zhan-fa-by-jin407891080/?envType=study-plan-v2&envId=top-100-liked
       高赞评论 2019.10.25
-     */
-    let s = "()[]{}";
-    // let s = "{[]}";
-    // let s = "([)]";
 
+      🧠 思路讲解
+
+        这道题的本质是：检查括号是否能「正确配对 + 按顺序闭合」。
+
+        解决这种“后进先出”的问题，最自然的结构就是 栈（Stack）。
+
+      🧩 栈思路详解
+
+      我们从左到右遍历字符串：
+      1. 如果遇到左括号（(、{、[）
+        → 把它对应的右括号入栈（压入数组末尾）
+        例如遇到 '(' → 压入 ')'
+
+      2. 如果遇到右括号
+        → 说明需要从栈顶弹出一个括号与之匹配
+          - 如果栈为空（没有左括号） ❌ 无效
+          - 如果栈顶元素不是当前右括号 ❌ 无效
+          
+      3. 遍历完字符串后，栈应该是空的 ✅
+          - 否则说明还有没闭合的左括号。
+
+      ✅ 总结一句话：
+
+      用栈模拟括号匹配过程：
+      1. 左括号入栈对应的右括号；
+      2. 遇到右括号时检查栈顶；
+      3. 最后栈空则有效，否则无效。
+     */
     function isValid(str) {
-      let arr = [];
+      let arr = []; // 用数组模拟栈
 
       for (let s of str) {
         if (s === '{') arr.push('}');
         else if (s === '(') arr.push(')');
         else if (s === '[') arr.push(']');
-        else if (s !== arr.pop()) return false;
+        else if (s !== arr.pop()) return false; // 匹配失败
       }
 
+      // 所有括号匹配完成后，栈必须为空，否则如果只有 [ 单个符号输入会出错
       return arr.length === 0;
     }
-
-    console.log(isValid(s));
   </script>
 </body>
 </html>
