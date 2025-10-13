@@ -9,37 +9,65 @@
   <script>
     /* 
       https://leetcode.cn/problems/permutations/solutions/247052/chou-xiang-cheng-jue-ce-shu-yi-ge-pai-lie-jiu-xian/?envType=study-plan-v2&envId=top-100-liked
-    */
-    let nums = [1,2,3];
 
-    function permute(nums) {
+      🧠 核心思路：回溯法（DFS）
+
+        回溯是一种「试探性」的搜索算法
+        我们逐个选择数字、构建路径，当路径不满足条件时就返回（撤销选择）
+
+      你可以把它想象成“在一棵决策树上深度优先遍历所有可能的路径”。
+
+
+      🧩 算法框架
+        1. 选择一个未被使用的数；
+        2. 加入当前路径；
+        3. 递归构建下一层；
+        4. 回溯（撤销选择）。
+
+
+      🔍 关键点详解
+        ① 为什么要用 used[i]?
+
+        为了防止重复选择同一个数字，比如：
+          - 当前路径是 [1]
+          - 我们不能再选第二个 1（因为 1 已经在用了）
+
+        ② 为什么要用 path.pop() + used[num] = false
+          回溯的本质是 撤销选择，让算法回到上一步继续尝试别的分支。
+
+        不撤销的话，路径会一直累加下去，造成错误。
+    */
+    var permute = function(nums) {
       let res = [];
+      let path = [];
       let used = {};
 
-      function dfs(path) {
+      function backtrack() {
+        // 终止条件：路径长度等于数组长度
         if (path.length === nums.length) {
-          res.push(path.slice());
+          res.push([...path]); // 拷贝一份结果
           return;
         }
 
         for (let num of nums) {
-          if (used[num]) continue;
+          if (used[num]) continue; // 跳过已使用的数字
 
-          path.push(num);
+          // 做选择
+          path.push(nums[i]);
           used[num] = true;
 
-          dfs(path);
+          // 进入下一层
+          backtrack();
 
+          // 撤销选择（回溯）
           path.pop();
           used[num] = false;
         }
       }
 
-      dfs([]);
+      backtrack();
       return res;
-    }
-
-    console.log(permute(nums));
+    };
   </script>
 </body>
 </html>
