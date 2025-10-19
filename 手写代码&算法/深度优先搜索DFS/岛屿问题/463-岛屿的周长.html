@@ -12,25 +12,46 @@
      * 
      * 要点：1、岛屿的周长 = 岛屿方格 和 非岛屿方格 相邻的边的数量；非岛屿方格（水域方格、网格的边界）
      * 2、从一个岛屿方格走向一个非岛屿方格，就将周长加 1
+     * 
+      🌊 一、核心思路
+
+        ｜用 DFS 从某个陆地出发，递归探索所有连在一起的陆地。
+        ｜在 DFS 过程中计算每块陆地的“边界数”，所有边界数相加就是周长。
+
+      🧠 二、关键洞察：什么时候产生“边”
+        当 DFS 扩展时，有 4 种情况：
+
+          1. 走到网格边界（r < 0 || r >= grid.length || c < 0 || c >= grid[0].length），周长加 1
+
+          2. 走到水域方格（grid[r][c] === 0），周长加 1
+
+          3. 遇到已经访问过的陆地（grid[r][c] === 2），周长加 0
+
+          4. 遇到未访问的陆地（grid[r][c] === 1），周长加 0（但会在递归里算出它的边）
+
      */ 
     var islandPerimeter = function(grid) {
       for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[0].length; c++) {
           if (grid[r][c] === 1) {
-            return dfs(grid, r, c);
+            return dfs(grid, r, c); // 找到一块陆地，从这里开始递归，题目保证只有一个岛，所以找到第一个 1 就够了。
           }
         }
       }
 
       function dfs(grid, r, c) {
+        // ① 越界：说明这一侧是外部边界
         if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) return 1;
 
+        // ② 遇到水：陆地边缘贴着水
         if (grid[r][c] === 0) return 1;
 
+        // ③ 遇到访问过的格子（2 或其他）
         if (grid[r][c] !== 1) return 0;
 
-        grid[r][c] = 2;
+        grid[r][c] = 2; // 标记已访问，防止重复计算
 
+        // 把四个方向的周长部分加起来
         return dfs(grid, r + 1, c)
           + dfs(grid, r - 1, c)
           + dfs(grid, r, c + 1)
