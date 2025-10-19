@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * https://leetcode-cn.com/problems/merge-intervals/
+     * 
+     * 这是面试常考题之一，考察你对排序 + 区间合并逻辑的理解。
+     * 
+     * 🧠 核心思路
+
+        💡 思考方向
+
+        我们要做的就是：
+          1. 先把所有区间按起点排序。
+            因为只有相邻的区间才可能重叠。
+
+          2. 遍历所有区间，用一个变量保存当前合并区间。
+            - 如果新区间和当前区间有重叠 → 合并它们；
+            - 如果没有重叠 → 把当前区间存入结果数组，更新当前区间。
+     */
+
+    var merge = function(intervals) {
+      if (intervals.length === 0) return [];
+
+      // ✅ 1. 按起点排序
+      intervals.sort((a, b) => a[0] - b[0]);
+
+      let res = [];                  // 存放结果
+      let current = intervals[0];    // 当前正在合并的区间
+
+      // ✅ 2. 从第二个区间开始遍历
+      for (let i = 1; i < intervals.length; i++) {
+        let next = intervals[i];
+
+        // 🧩 如果有重叠：合并区间
+        if (next[0] <= current[1]) {
+          // 取右端点的最大值
+          current[1] = Math.max(current[1], next[1]);
+        } 
+        // 🚫 没有重叠：推入结果，并更新当前区间
+        else {
+          res.push(current);
+          current = next;
+        }
+      }
+
+      // 最后一个区间也要加入结果
+      res.push(current);
+
+      return res;
+    };
+  </script>
+</body>
+</html>
