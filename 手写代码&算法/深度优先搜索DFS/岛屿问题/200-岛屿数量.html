@@ -14,15 +14,41 @@
      * 
      * 要点：1、访问上下左右四个相邻节点
      * 2、base case 是什么？超出网格范围的格子
+     * 
+        🧠 一、思路解析
+
+          这题的核心思想是：
+
+          ｜遍历整个网格；
+          ｜每次发现一块陆地（'1'）时，就把与它相连的整块陆地都“淹掉”；
+          ｜每淹掉一块岛屿，岛屿数量 +1。
+
+          ✅ “淹掉”的意思是什么？
+
+          我们可以用递归（DFS）的方法去「访问」这块岛屿的所有相邻陆地，
+          把它们从 '1' 改成 '2'（或者 '0' 都行），表示已经访问过了。
+
+        🔍 二、整体算法步骤
+
+          1. 遍历二维数组的每个格子。
+
+          2. 如果发现 '1'（陆地）：
+            - 岛屿数量 count++
+            - 调用 dfs，从这个格子出发，把整块岛屿都标记成 '2'
+
+          3. DFS 递归搜索方向：
+            - 上、下、左、右（四个方向）
+          
+          4. 避免越界或重复访问。
      */ 
     var numIslands = function(grid) {
       let count = 0;
 
       for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[0].length; c++) {
-          if (grid[r][c] === '1') {
-            dfs(grid, r, c);
-            count++;
+          if (grid[r][c] === '1') { // 一旦遇到 '1'，说明找到一块新岛屿
+          dfs(grid, r, c); // 调用 dfs() 把这块岛屿完全“淹掉”（即标记访问过）
+          count++; // 岛屿数量加一
           }
         }
       }
@@ -30,10 +56,10 @@
       return count;
 
       function dfs(grid, r, c) {
-        if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) return;
-        if (grid[r][c] !== '1') return;
+        if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) return; // 越界
+        if (grid[r][c] !== '1') return; // 遇到水或访问过的陆地，终止
 
-        grid[r][c] = '2';
+        grid[r][c] = '2'; // 标记为已访问（淹没），必须先标记后再dfs递归
 
         dfs(grid, r + 1, c);
         dfs(grid, r - 1, c);
