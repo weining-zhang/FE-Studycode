@@ -8,18 +8,32 @@
 <body>
   <script>
     /**
+     * https://leetcode.cn/problems/max-area-of-island/
      * https://leetcode.cn/problems/number-of-islands/solutions/211211/dao-yu-lei-wen-ti-de-tong-yong-jie-fa-dfs-bian-li-/?envType=study-plan-v2&envId=top-100-liked
      * 
      * 每遍历到一个格子，就把面积加一
+     * 
+      🧠 二、思路概述
+
+        这道题可以看作是「岛屿数量」的变体：
+        
+        | 岛屿数量            | 岛屿最大面积         |
+        | ---------------   | --------------      |
+        | 每找到一块岛屿就 +1 | 每找到一块岛屿就计算它的面积 |
+        | DFS 递归标记访问    | DFS 递归累加面积     |
+
+        所以这里的核心依然是：
+        - 用 DFS 遍历整块岛屿，统计每块岛屿的格子数。
+
      */ 
     var maxAreaOfIsland = function(grid) {
-      let max = 0;
+      let max = 0; // 记录最大的岛屿面积
 
       for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[0].length; c++) {
-          if (grid[r][c] === 1) {
-            let a = area(grid, r, c);
-            max = Math.max(a, max);
+          if (grid[r][c] === 1) {       // 找到一块未访问的陆地
+            let a = area(grid, r, c);   // 用 DFS 计算这个岛的面积
+            max = Math.max(a, max);     // 更新最大值
           }
         }
       }
@@ -27,11 +41,14 @@
       return max;
 
       function area(grid, r, c) {
+        // ✅ 越界或不是陆地，面积贡献为 0
         if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) return 0;
         if (grid[r][c] !== 1) return 0;
 
+        // ✅ 标记为已访问（防止重复计数）
         grid[r][c] = 2;
 
+        // ✅ 面积 = 当前格子(1) + 上下左右四个方向的面积
         return 1
           + area(grid, r + 1, c)
           + area(grid, r - 1, c)
