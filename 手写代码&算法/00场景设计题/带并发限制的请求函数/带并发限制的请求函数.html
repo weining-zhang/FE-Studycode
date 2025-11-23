@@ -38,38 +38,39 @@
      */ 
 
     function sendRequest(requestList, limits, cb) {
-      let queue = requestList.map((task, idx) => ({
-        task,
-        idx,
-      }));
+      let queue = requestList.map((task, idx) => ({ task, idx }));
       let results = [];
-      let runningCount = 0;
+      let running = 0;
+      let finished = 0;
+      let called = false;
 
       run();
 
       function run() {
-        while (runningCount < limits && queue.length > 0) {
-          let { task, idx } = queue.shift();
+        if (running >= limit) return;
+        if (queue.length === 0) return;
 
-          runningCount++;
+        let { task, idx } = queue.shift();
+        running++;
 
-          task()
-            .then((res) => {
-              results[idx] = res;
-            })
-            .catch((err) => {
-              results[idx] = err;
-            })
-            .finally(() => {
-              runningCount--;
+        task()
+          .then((res) => {
+            results[idx] = res;
+          })
+          .catch((err) => {
+            results[idx] = err;
+          })
+          .finally(() => {
+            running--;
+            finished++;
 
-              if (results.length === requestList.length) {
-                cb(results);
-              }
+            if (finished === requestList.length && !called) {
+              called = true; // 只调用一次 cb
+              cb(results);
+            }
 
-              run();
-            })
-        }
+            run();
+          })
       }
     }
 
