@@ -7,7 +7,7 @@
 </head>
 <body>
   <script>
-    // 1.防抖
+    // 1.防抖：触发后等待一段时间，如果期间再次触发，则重新计时。
     function debounce(fn, delay) {
       let timerId;
 
@@ -46,7 +46,7 @@
 
 
 
-    // 2.节流
+    // 2.节流：在一定时间内只执行一次，多次触发会被忽略。
     function throttle(fn, delay) {
       let lastTime = 0;
 
