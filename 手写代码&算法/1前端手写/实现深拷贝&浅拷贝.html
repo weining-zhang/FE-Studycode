@@ -49,10 +49,10 @@
     function cloneDeep1(obj, map = new WeakMap()) {
       if (typeof obj !== 'object' || obj === null) return obj; // null 是基本数据类型，也需要返回
 
-      if (map.get(obj)) return map.get(obj);
+      if (map.get(obj)) return map.get(obj); // 如果已经克隆过，则直接返回克隆结果
 
       let newObj = Array.isArray(obj) ? [] : {};
-      map.set(obj, newObj);
+      map.set(obj, newObj); // 记录已经克隆过的对象
 
       for (let key in obj) {
         newObj[key] = cloneDeep1(obj[key], map);
