@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     *  在原来基础上，增加一个参数用来控制请求失败的重试次数
+     */ 
+
+    function sendRequest(requestList, limits, maxRetry = 0, cb) {
+      let queue = requestList.map((task, idx) => ({ idx, task, retry: maxRetry }));
+      let results = [];
+      let running = 0;
+      let finished = 0;
+      let called = false;
+
+      run();
+
+      function run() {
+        if (running >= limits) return;
+        if (queue.length === 0) return;
+
+        let { task, retry, idx } = queue.shift();
+        running++;
+
+        task()
+          .then((res) => {
+            results[idx] = res;
+            finished++; // ✔ 最终结果落实
+          })
+          .catch((err) => {
+            if (retry > 0) {
+              queue.push({ // 关键：重新加入执行队列
+                idx,
+                task,
+                retry: retry - 1, // ✔ 重试不算 finished
+              })
+            } else {
+              results[idx] = err;
+              finished++; // ✔ 最终失败结果落实
+            }
+          })
+          .finally(() => {
+            running--;
+
+            if (finished === requestList.length && !called) {
+              called = true;
+              cb(results);
+            }
+
+            run();
+          })
+      }
+    }
+
+
+  </script>
+</body>
+</html>

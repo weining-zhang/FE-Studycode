@@ -47,7 +47,7 @@
       run();
 
       function run() {
-        if (running >= limit) return;
+        if (running >= limits) return;
         if (queue.length === 0) return;
 
         let { task, idx } = queue.shift();
