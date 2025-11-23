@@ -9,68 +9,50 @@
 
 <body>
   <script>
-    /**
-     * 四个功能点：
-     * 发布者：订阅、取消订阅、发布消息
-     * 订阅者：接收消息
-     */ 
-
-    // 发布者
-    class Publisher {
+    class EventBus {
       constructor() {
-        this.subscribers = {};
+        // 存储事件和对应的订阅回调
+        this.events = {}; // { eventName: [handler1, handler2, ...] }
       }
 
-      // 订阅
-      subscribe(event, callback) {
-        if (!this.subscribers[event]) {
-          this.subscribers[event] = [];
-        }
-        this.subscribers[event].push(callback);
+      // 订阅事件
+      on(event, handler) {
+        // 若事件不存在则初始化为空数组，然后 push handler
+        (this.events[event] || (this.events[event] = [])).push(handler);
       }
 
-      // 取消订阅
-      unsubscribe(event, callback) {
-        if (this.subscribers[event]) {
-          this.subscribers[event] = this.subscribers[event].filter(subscriber => subscriber !== callback);
-        }
+      // 取消订阅事件
+      off(event, handler) {
+        if (!this.events[event]) return;
+        // 过滤掉要取消的 handler
+        this.events[event] = this.events[event].filter(h => h !== handler);
       }
 
-      // 发布消息
-      publish(event, data) {
-        if (this.subscribers[event]) {
-          this.subscribers[event].forEach(subscriber => {
-            subscriber(data);
-          });
-        }
+      // 发布事件（支持传递任意参数）
+      emit(event, ...args) {
+        if (!this.events[event]) return;
+        // 挨个触发订阅的回调
+        this.events[event].forEach(handler => handler(...args));
       }
     }
 
-    // 订阅者
-    class Subscriber {
-      constructor(name) {
-        this.name = name;
-      }
+    const bus = new EventBus();
 
-      // 订阅的回调函数
-      handleMessage(data) {
-        console.log(`${this.name} received message: ${data}`);
-      }
+    function onLogin(info) {
+      console.log("收到登录事件：", info);
     }
-
-    // 创建发布者实例
-    const publisher = new Publisher();
-
-    // 创建订阅者实例
-    const subscriber1 = new Subscriber('Subscriber 1');
-    const subscriber2 = new Subscriber('Subscriber 2');
 
     // 订阅事件
-    publisher.subscribe('message', data => subscriber1.handleMessage(data));
-    publisher.subscribe('message', data => subscriber2.handleMessage(data));
+    bus.on("login", onLogin);
 
-    // 发布消息
-    publisher.publish('message', 'Hello, subscribers!');
+    // 发布事件
+    bus.emit("login", { user: "Alice" });
+
+    // 取消订阅
+    bus.off("login", onLogin);
+
+    // 再次发布（不会触发）
+    bus.emit("login", { user: "Bob" });
 
 //-------------------------------------------------------------------------------------------
     // 练习区：
