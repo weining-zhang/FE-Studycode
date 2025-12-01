@@ -22,18 +22,25 @@
     console.log(arr3);
 
     // 4.使用递归
-    function myFlat(arr) {
-      let res  = []
-      arr.forEach(value => {
-        if (Array.isArray(value)) {
-          res = [...res, ...myFlat(value)]
+    // 思路：
+    // 1. 递归
+    // 2. 处理 depth
+    // 3. 每次递归累积结果数组
+    function flat(arr, depth) {
+      let res = [];
+      
+      for(let item of arr) {
+        // 如果 item 是数组，且 depth > 0 才继续扁平
+        if (Array.isArray(item) && depth > 0) {
+          res.push(...flat(item, depth - 1))
         } else {
-          res.push(value)
+          res.push(item);
         }
-      })
-      return res
+      }
+
+      return res;
     }
-    console.log(myFlat(arr));
+    console.log(flat(arr));
 //----------------------------------------------------------------------------------------------    
     // 练习区：
     
