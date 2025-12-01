@@ -15,38 +15,50 @@
      */ 
 
     var checkInclusion = function(s1, s2) {
-      let need = {};
-      let window = {};
+      let need = {};     // need 记录 s1 中每个字符需要出现的次数
+      let window = {};   // window 记录当前窗口中每个字符出现的次数
 
+      // 统计 s1 中每个字符出现次数
       for (let c of s1) {
         need[c] = need[c] ? need[c] + 1 : 1;
       }
 
-      let l = 0;
-      let r = 0;
-      let valid = 0;
+      let left = 0
+      let right = 0;
+      let valid = 0; // 有多少字符的出现次数达成 need 的要求
 
-      while (r < s2.length) {
-        let rightCr = s2[r];
-        r++;
+      while (right < s2.length) {
 
+        /** -------------------- 扩展窗口：加入 s2[right] -------------------- **/
+        let rightCr = s2[right];
+        right++;
+
+        // 只处理 s1 中存在的字符，其他字符对窗口无意义
         if (need[rightCr]) {
           window[rightCr] = window[rightCr] ? window[rightCr] + 1 : 1;
+
+          // 某字符次数达到要求，valid++
           if (window[rightCr] === need[rightCr]) {
             valid++;
           }
         }
 
-        while (r - l >= s1.length) {
+        /** -------------------- 收缩窗口，使窗口大小固定为 s1.length -------------------- **/
+        while (right - left >= s1.length) {  
+          // 若所有字符都满足，说明找到排列
           if (valid === Object.keys(need).length) return true;
 
-          let leftCr = s2[l];
-          l++;
+          let leftCr = s2[left];
+          left++;
 
+          // 若移除的字符是 s1 需要的字符，则更新 window 记录
           if (need[leftCr]) {
+            // 移除后次数不再满足 need，则 valid--
             if (window[leftCr] === need[leftCr]) {
               valid--;
             }
+            
+            // 移除窗口左边字符
             window[leftCr] = window[leftCr] ? window[leftCr] - 1 : 1;
           }
         }
