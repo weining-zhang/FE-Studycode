@@ -33,17 +33,17 @@
 
       // 递归函数：返回当前节点的高度
       function depth(root) {
-        if (root === null) return 0; // 空节点高度为 0
+        if (!root) return 0; // 空节点高度为 0
 
         // 分别计算左右子树高度
         let left = depth(root.left);
         let right = depth(root.right);
 
         // 更新最大直径（注意是边数，所以 left + right）
-        max = Math.max(max, left + right);
+        max = Math.max(max, left + right); // 直径是跨两棵子树的边数 → left + right → 不需要 +1
 
         // 返回当前节点的高度（需要 +1 表示当前节点这一层）
-        return Math.max(left, right) + 1;
+        return Math.max(left, right) + 1; // depth() 返回高度，需要计算节点数 → 所以要 +1
       }
     }
   </script>
