@@ -10,6 +10,13 @@
     /* 
           https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
       思路：https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/javascriptjie-zhong-xu-bian-li-er-cha-shu-by-user7/
+
+      | 遍历方式             | 顺序            | 记忆口诀      |
+      | ---------------- | ------------- | --------- |
+      | **前序 Preorder**  | **根 → 左 → 右** | **“根在前”** |
+      | **中序 Inorder**   | **左 → 根 → 右** | **“根在中”** |
+      | **后序 Postorder** | **左 → 右 → 根** | **“根在后”** |
+
     */
     function inorderTraversal(root) {
       let res = [];
